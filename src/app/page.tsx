@@ -1,101 +1,87 @@
-import Image from "next/image";
+import Image from "next/image"
+import { Briefcase, Mail, MapPin, Phone } from "lucide-react"
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+        <div className="px-6 py-8">
+          <header className="border-b pb-8">
+            <div className="flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-bold text-gray-900">Nilambar Elangbam</h1>
+                <p className="text-xl text-gray-600">Computer Science Engineering Student</p>
+              </div>
+              
+            </div>
+            <div className="mt-4 flex flex-wrap gap-4">
+              <div className="flex items-center text-gray-600">
+                <Mail className="w-5 h-5 mr-2" />
+                <span>nilambar_e22@mtu.ac.in</span>
+              </div>
+              <div className="flex items-center text-gray-600">
+                <Phone className="w-5 h-5 mr-2" />
+                <span>-91 9366462995</span>
+              </div>
+              <div className="flex items-center text-gray-600">
+                <MapPin className="w-5 h-5 mr-2" />
+                <span>Imphal, Manipur, India</span>
+              </div>
+            </div>
+          </header>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          <section className="mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Education</h2>
+            <div className="mb-4">
+              <h3 className="text-lg font-medium text-gray-900">Bachelor of Technology in Computer Science and Engineering</h3>
+              <p className="text-gray-600">Manipur Technical University</p>
+              <p className="text-gray-600">Expected Graduation: May 2026</p>
+            </div>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Skills</h2>
+            <div className="flex flex-wrap gap-2">
+              {["JavaScript", "Python", "React", "Node.js", "SQL", "Git", "Data Structures", "Algorithms"].map(
+                (skill) => (
+                  <span key={skill} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">
+                    {skill}
+                  </span>
+                ),
+              )}
+            </div>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Projects</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-medium text-gray-900">Skill-Barter Website</h3>
+                <p className="text-gray-600">Developed a full-stack Skill-Barting platform using React and Node.js</p>
+              </div>
+              <div>
+                <h3 className="text-lg font-medium text-gray-900">ALPR(Automatic License Plate Recognition) Sysytem</h3>
+                <p className="text-gray-600">Implemented a real-time ALPR system using Python, OpenCV and Google Cloud Vision API</p>
+              </div>
+            </div>
+          </section>
+
+          <section className="mt-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">Work Experience</h2>
+            <div className="space-y-4">
+              <div>
+                <h3 className="text-lg font-medium text-gray-900">IoT Intern</h3>
+                <p className="text-gray-600">CubeTen Technologies | August 2024</p>
+                <ul className="list-disc list-inside text-gray-600 mt-2">
+                  <li>Assisted in developing and testing IoT devices and systems</li>
+                  <li>Collaborated with  developers to improve code quality and efficiency</li>
+                </ul>
+              </div>
+            </div>
+          </section>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
-  );
+  )
 }
+
