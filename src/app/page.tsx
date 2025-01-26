@@ -1,16 +1,72 @@
-import Image from "next/image"
-import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
+import { Mail, Phone, MapPin, Github, Linkedin, Sun, Moon } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
+
+import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
+
+
 
 export default function Home() {
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    if (darkMode) {
+      document.documentElement.classList.remove("dark");
+    } else {
+      document.documentElement.classList.add("dark");
+    }
+  };
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
         <div className="px-6 py-8">
+        <NavigationMenu>
+          <NavigationMenuList>
+            <NavigationMenuItem>
+              <NavigationMenuTrigger>Home</NavigationMenuTrigger>
+              <NavigationMenuContent>
+                <NavigationMenuLink>Link</NavigationMenuLink>
+              </NavigationMenuContent>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Blog
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+            <NavigationMenuItem>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Tags
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                About
+              </NavigationMenuLink>
+            </NavigationMenuItem>
+
+          </NavigationMenuList>
+        </NavigationMenu>
+
           <header className="border-b pb-8">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col justify-between py-8">
               <div>
-                <h1 className="text-3xl font-bold text-gray-900">Nilambar Elangbam</h1>
-                <p className="text-xl text-gray-600">Computer Science Engineering Student</p>
+                <h1 className="text-3xl font-bold">Nilambar Elangbam</h1>
+                <p className="text-xl">Computer Science Engineering Student</p>
               </div>
             </div>
             <div className="mt-4 flex flex-col gap-4">
