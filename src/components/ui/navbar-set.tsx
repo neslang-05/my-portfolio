@@ -17,17 +17,10 @@ const NavbarSet = () => {
     return (
         <NavigationMenu >
             <NavigationMenuList>
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger>Home</NavigationMenuTrigger>
-                    <NavigationMenuContent className="p-3 space-y-2 width-y-48" >
-                        <ul className="gap-3 p-1 md:w-[200px] ">
-                            <div className="text-sm-bold">
-                                <li><a className="hover:font-bold hover:text-green-900" href="#about">My Projects</a></li>
-                                <li><a className="hover:font-bold hover:text-green-900" href="#about">Work Experience</a></li>
-                                <li><a className="hover:font-bold hover:text-green-900" href="#about">Education</a></li>
-                            </div>
-                        </ul>
-                    </NavigationMenuContent>
+            <NavigationMenuItem>
+                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                        <div className="cursor-pointer"><a href="./">Home</a></div>
+                    </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
@@ -38,7 +31,7 @@ const NavbarSet = () => {
 
                 <NavigationMenuItem>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        <div className="cursor-pointer"><a href="/tag">Tag</a></div>
+                        <div className="cursor-pointer"><a href="/tags">Tag</a></div>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
