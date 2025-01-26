@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link"
- 
+
 import { cn } from "@/lib/utils"
 import { useState } from "react";
 import Image from "next/image";
@@ -33,40 +33,40 @@ export default function Home() {
   };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4 px-top-1 sm:px-6 lg:px-8">
-        <NavigationMenu >
-          <NavigationMenuList>
-            <NavigationMenuItem>
-              <NavigationMenuTrigger>Home</NavigationMenuTrigger>
-              <NavigationMenuContent className="p-3 space-y-2 width-y-48" >
-                <ul className="gap-3 p-1 md:w-[200px] "> 
-                  <div className="text-sm-bold">
+      <NavigationMenu >
+        <NavigationMenuList>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger>Home</NavigationMenuTrigger>
+            <NavigationMenuContent className="p-3 space-y-2 width-y-48" >
+              <ul className="gap-3 p-1 md:w-[200px] ">
+                <div className="text-sm-bold">
                   <li><a className="hover:font-bold hover:text-green-900" href="#about">My Projects</a></li>
                   <li><a className="hover:font-bold hover:text-green-900" href="#about">Work Experience</a></li>
                   <li><a className="hover:font-bold hover:text-green-900" href="#about">Education</a></li>
-                  </div>
-                </ul>
-              </NavigationMenuContent>
-            </NavigationMenuItem>
+                </div>
+              </ul>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <div className="cursor-pointer">Blog</div>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <div className="cursor-pointer">Blog</div>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
 
-            <NavigationMenuItem>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+          <NavigationMenuItem>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               <div className="cursor-pointer">Tag</div>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
-            <NavigationMenuItem>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
               <div className="cursor-pointer">About</div>
-              </NavigationMenuLink>
-            </NavigationMenuItem>
+            </NavigationMenuLink>
+          </NavigationMenuItem>
 
-          </NavigationMenuList>
-        </NavigationMenu>
+        </NavigationMenuList>
+      </NavigationMenu>
       <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
         <div className="px-6 py-8">
 
