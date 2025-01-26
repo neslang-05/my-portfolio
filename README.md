@@ -48,7 +48,7 @@ To get a local copy up and running, follow these steps:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your-username/my-portfolio.git
+   git clone https://github.com/neslang-05/my-portfolio.git
    ```
 
 2. Navigate to the project directory:
