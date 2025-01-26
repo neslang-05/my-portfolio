@@ -1,11 +1,15 @@
 "use client";
 import { SubscribeForm } from "@/components/ui/subscribe-form"
 import { BlogPosts } from "@/components/ui/blog-post"
+import NavbarSet from "@/components/ui/navbar-set";
 
 export default function Page() {
   return (
     <div className="min-h-screen bg-gray-50">
       <main className="max-w-2xl mx-auto px-4 py-12">
+        <div className="flex flex-row justify-center py-4">
+          <NavbarSet />
+        </div>
         <header className="mb-12">
           <h1 className="text-2xl font-normal text-gray-900 mb-4">ashu.me - a blog by Nilambar Elangbam</h1>
           <p className="text-gray-600 mb-8">
