@@ -1,5 +1,5 @@
 import Image from "next/image"
-import { Briefcase, Mail, MapPin, Phone } from "lucide-react"
+import { Mail, Phone, MapPin, Github, Linkedin } from "lucide-react";
 
 export default function Home() {
   return (
@@ -12,16 +12,23 @@ export default function Home() {
                 <h1 className="text-3xl font-bold text-gray-900">Nilambar Elangbam</h1>
                 <p className="text-xl text-gray-600">Computer Science Engineering Student</p>
               </div>
-              
             </div>
-            <div className="mt-4 flex flex-wrap gap-4">
+            <div className="mt-4 flex flex-col gap-4">
               <div className="flex items-center text-gray-600">
                 <Mail className="w-5 h-5 mr-2" />
-                <span>nilambar_e22@mtu.ac.in</span>
+                <a href="mailto:neslang.in@gmail.com" target="_blank" rel="noopener noreferrer">neslang.in@gmail.com</a>
               </div>
               <div className="flex items-center text-gray-600">
                 <Phone className="w-5 h-5 mr-2" />
-                <span>-91 9366462995</span>
+                <a href="https://wa.me/919366462995" target="_blank" rel="noopener noreferrer">+91 9366462995</a>
+              </div>
+              <div className="flex items-center text-gray-600">
+                <Github className="w-5 h-5 mr-2" />
+                <a href="https://github.com/neslang-05" target="_blank" rel="noopener noreferrer">GitHub/neslang-05</a>
+              </div>
+              <div className="flex items-center text-gray-600">
+                <Linkedin className="w-5 h-5 mr-2" />
+                <a href="https://www.linkedin.com/in/nilambar-elangbam-524617247/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
               </div>
               <div className="flex items-center text-gray-600">
                 <MapPin className="w-5 h-5 mr-2" />
@@ -60,7 +67,7 @@ export default function Home() {
                 <p className="text-gray-600">Developed a full-stack Skill-Barting platform using React and Node.js</p>
               </div>
               <div>
-                <h3 className="text-lg font-medium text-gray-900">ALPR(Automatic License Plate Recognition) Sysytem</h3>
+                <h3 className="text-lg font-medium text-gray-900">ALPR(Automatic License Plate Recognition) System</h3>
                 <p className="text-gray-600">Implemented a real-time ALPR system using Python, OpenCV and Google Cloud Vision API</p>
               </div>
             </div>
@@ -74,7 +81,7 @@ export default function Home() {
                 <p className="text-gray-600">CubeTen Technologies | August 2024</p>
                 <ul className="list-disc list-inside text-gray-600 mt-2">
                   <li>Assisted in developing and testing IoT devices and systems</li>
-                  <li>Collaborated with  developers to improve code quality and efficiency</li>
+                  <li>Collaborated with developers to improve code quality and efficiency</li>
                 </ul>
               </div>
             </div>
@@ -84,4 +91,3 @@ export default function Home() {
     </div>
   )
 }
-
