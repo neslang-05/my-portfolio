@@ -32,18 +32,18 @@ const NavbarSet = () => {
 
                 <NavigationMenuItem>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        <div className="cursor-pointer">Blog</div>
+                        <div className="cursor-pointer"><a href="/blog">Blog</a></div>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
 
                 <NavigationMenuItem>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        <div className="cursor-pointer">Tag</div>
+                        <div className="cursor-pointer"><a href="/tag">Tag</a></div>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        <div className="cursor-pointer">About</div>
+                        <div className="cursor-pointer"><a href="/about">About</a></div>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
 
