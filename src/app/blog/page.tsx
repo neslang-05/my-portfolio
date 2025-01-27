@@ -2,10 +2,11 @@
 import { SubscribeForm } from "@/components/ui/subscribe-form"
 import { BlogPosts } from "@/components/ui/blog-post"
 import NavbarSet from "@/components/ui/navbar-set";
+import Footer from "@/components/ui/footer";
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen">
       <main className="max-w-2xl mx-auto px-4 py-12">
         <div className="flex flex-row justify-center py-4">
           <NavbarSet />
@@ -30,6 +31,7 @@ export default function Page() {
           <BlogPosts />
         </section>
       </main>
+      <Footer />
     </div>
   )
 }

@@ -19,7 +19,7 @@ const NavbarSet = () => {
             <NavigationMenuList>
             <NavigationMenuItem>
                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                        <div className="cursor-pointer"><a href="./">Home</a></div>
+                        <div className="cursor-pointer"><a href="../">Home</a></div>
                     </NavigationMenuLink>
                 </NavigationMenuItem>
 
