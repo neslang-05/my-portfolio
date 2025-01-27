@@ -18,6 +18,7 @@ import {
 
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
 import NavbarSet from "@/components/ui/navbar-set";
+import Footer from "@/components/ui/footer";
 
 export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
@@ -88,10 +89,22 @@ export default function Home() {
 
           <section className="mt-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4" id="about">Education</h2>
-            <div className="mb-4">
+            <div className=" cursor-pointer mb-4 p-3 transition-all duration-300 hover:bg-green-100/60 hover:-translate-y-[5px] hover:shadow-sm rounded-lg"  >
               <h3 className="text-lg font-medium text-gray-900">Bachelor of Technology in Computer Science and Engineering</h3>
               <p className="text-gray-600">Manipur Technical University</p>
               <p className="text-gray-600">Expected Graduation: May 2026</p>
+            </div>
+            <div className=" cursor-pointer mb-4 p-3 transition-all duration-300 hover:bg-green-100/60 hover:-translate-y-[5px] hover:shadow-sm rounded-lg">
+              <h3 className="text-lg font-medium text-gray-900">12th Standard</h3>
+              <p className="text-gray-600">Herbert School, Changangei</p>
+              <p className="text-gray-600">Year: 2022</p>
+            </div>
+
+
+            <div className=" cursor-pointer mb-4 p-3 transition-all duration-300 hover:bg-green-100/60 hover:-translate-y-[5px] hover:shadow-sm rounded-lg">
+              <h3 className="text-lg font-medium text-gray-900">10th Standard</h3>
+              <p className="text-gray-600">Don Bosco School, Imphal</p>
+              <p className="text-gray-600">Year: 2020</p>
             </div>
           </section>
 
@@ -100,7 +113,7 @@ export default function Home() {
             <div className="flex flex-wrap gap-2">
               {["JavaScript", "Python", "React", "Node.js", "SQL", "Git", "Data Structures", "Algorithms"].map(
                 (skill) => (
-                  <span key={skill} className="bg-gray-200 text-gray-800 px-3 py-1 rounded-full text-sm">
+                  <span key={skill} className="cursor-pointer mb-4 p-3 transition-all duration-300 hover:bg-green-100/60 hover:-translate-y-[5px] hover:shadow-sm rounded-lg">
                     {skill}
                   </span>
                 ),
@@ -111,14 +124,22 @@ export default function Home() {
           <section className="mt-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">Projects</h2>
             <div className="space-y-4">
-              <div>
-                <h3 className="text-lg font-medium text-gray-900">Skill-Barter Website</h3>
-                <p className="text-gray-600">Developed a full-stack Skill-Barting platform using React and Node.js</p>
-              </div>
-              <div>
-                <h3 className="text-lg font-medium text-gray-900">ALPR(Automatic License Plate Recognition) System</h3>
-                <p className="text-gray-600">Implemented a real-time ALPR system using Python, OpenCV and Google Cloud Vision API</p>
-              </div>
+              <Link href="/projects/iot-internship">
+                <div className=" cursor-pointer mb-4 p-3 transition-all duration-300 hover:bg-green-100/60 hover:-translate-y-[5px] hover:shadow-sm rounded-lg">
+                  <h3 className="text-lg font-medium text-gray-900">ALPR(Automatic License Plate Recognition) System</h3>
+                  <p className="text-gray-600">Implemented a real-time ALPR system using Python, OpenCV and Google Cloud Vision API</p>
+                </div>
+              </Link>
+
+              <Link href="/projects/skill-barter">
+                <div className=" cursor-pointer mb-4 p-3 transition-all duration-300 hover:bg-green-100/60 hover:-translate-y-[5px] hover:shadow-sm rounded-lg" >
+                  <h3 className="text-lg font-medium text-gray-900">Skill-Barter Website</h3>
+                  <p className="text-gray-600">Developed a full-stack Skill-Barting platform using React and Node.js</p>
+                </div>
+              </Link>
+
+
+
             </div>
           </section>
 
@@ -135,9 +156,7 @@ export default function Home() {
               </div>
             </div>
           </section>
-          <footer className="mt-8 py-4 border-t border-gray-200 text-center text-gray-600">
-            Loosely designed in Figma and coded in Visual Studio Code by yours truly. Built with Next.js and Tailwind CSS, deployed with Vercel. All text is set in the Inter typeface.
-          </footer>
+          <Footer />
         </div>
       </div>
     </div>
