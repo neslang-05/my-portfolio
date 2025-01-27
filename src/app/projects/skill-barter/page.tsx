@@ -12,7 +12,7 @@ import NavbarSet from "@/components/ui/navbar-set"
 
 export default function SkillSwapProjectPage() {
     return (
-        <div className="container mx-auto p-6 space-y-6">
+        <div className="container mx-auto p-6 space-y-6 max-w-3xl">
             <div className="flex flex-row justify-center py-4">
                 <NavbarSet />
             </div>

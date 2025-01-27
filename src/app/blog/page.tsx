@@ -1,6 +1,6 @@
 "use client";
-import { SubscribeForm } from "@/components/ui/subscribe-form"
-import { BlogPosts } from "@/components/ui/blog-post"
+import { SubscribeForm } from "@/components/subscribe-form"
+import { BlogPosts } from "@/components/blog-post"
 import NavbarSet from "@/components/ui/navbar-set";
 import Footer from "@/components/ui/footer";
 

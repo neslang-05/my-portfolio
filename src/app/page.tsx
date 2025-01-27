@@ -34,7 +34,7 @@ export default function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4 px-top-1 sm:px-6 lg:px-8">
       <NavbarSet />
-      <div className="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden">
+      <div className="max-w-4xl mx-auto overflow-hidden">
         <div className="px-6 py-8">
 
           <header className="border-b pb-8">
