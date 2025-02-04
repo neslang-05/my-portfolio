@@ -21,16 +21,6 @@ import NavbarSet from "@/components/ui/navbar-set";
 import Footer from "@/components/ui/footer";
 
 export default function Home() {
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode);
-    if (darkMode) {
-      document.documentElement.classList.remove("dark");
-    } else {
-      document.documentElement.classList.add("dark");
-    }
-  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4 px-top-1 sm:px-6 lg:px-8">
       <NavbarSet />
@@ -137,9 +127,6 @@ export default function Home() {
                   <p className="text-gray-600">Developed a full-stack Skill-Barting platform using React and Node.js</p>
                 </div>
               </Link>
-
-
-
             </div>
           </section>
 
@@ -162,3 +149,5 @@ export default function Home() {
     </div>
   )
 }
+
+
