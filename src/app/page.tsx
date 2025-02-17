@@ -21,6 +21,7 @@ import NavbarSet from "@/components/ui/navbar-set";
 import Footer from "@/components/ui/footer";
 
 export default function Home() {
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-12 px-4 px-top-1 sm:px-6 lg:px-8">
       <NavbarSet />
