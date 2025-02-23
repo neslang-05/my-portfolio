@@ -36,7 +36,7 @@ export default function AboutPage() {
                         />
                         <div className="space-y-4">
                             <p>
-                                I'm a passionate web developer and designer with a focus on creating beautiful, responsive, and
+                                I'm a passionate web developer and designer with a focus on creating be`autiful, responsive, and
                                 user-friendly websites. My portfolio showcases my skills in modern web technologies and my ability to
                                 bring designs to life.
                             </p>
