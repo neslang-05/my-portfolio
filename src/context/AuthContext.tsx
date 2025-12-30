@@ -23,6 +23,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    if (!auth) {
+      setLoading(false);
+      return;
+    }
+
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       setUser(user);
       setLoading(false);
@@ -34,6 +39,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAdmin = user?.email === ADMIN_EMAIL;
 
   const logout = async () => {
+    if (!auth) return;
     await signOut(auth);
   };
 
