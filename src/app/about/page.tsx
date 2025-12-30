@@ -1,114 +1,153 @@
-import React from "react"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Separator } from "@/components/ui/separator"
-import { ModeToggle } from "@/components/mode-toggle"
-import { Github, Linkedin, Mail } from "lucide-react"
-import Image from "next/image"
-import NavbarSet from "@/components/ui/navbar-set"
-import Footer from "@/components/ui/footer"
+import { getSiteData } from "@/lib/data";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Github, Linkedin, Instagram, Mail, MapPin, ExternalLink } from "lucide-react";
+import Link from "next/link";
+
+export const metadata = {
+  title: "About — Nilambar Elangbam",
+  description: "Learn more about Nilambar Elangbam, a Computer Science Engineering Student",
+};
 
 export default function AboutPage() {
-    return (
-        <div className="container mx-auto p-6 space-y-6">
-            <div className="flex flex-row justify-center py-4">
-                <NavbarSet />
+  const data = getSiteData();
+
+  return (
+    <div className="min-h-screen bg-black text-white">
+      <Navbar />
+      
+      <main className="max-w-4xl mx-auto px-6 py-12">
+        {/* Header */}
+        <header className="py-8 border-b border-zinc-800">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">About Me</h1>
+          <p className="text-zinc-400">{data.personal.title}</p>
+        </header>
+
+        {/* Bio */}
+        <section className="py-12 border-b border-zinc-800">
+          <div className="text-zinc-300 leading-relaxed space-y-4 max-w-3xl">
+            {data.personal.bio.split('\n\n').map((paragraph, i) => (
+              <p key={i}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        {/* Contact Info */}
+        <section className="py-12 border-b border-zinc-800">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Contact</h2>
+          
+          <div className="space-y-4">
+            <a 
+              href={`mailto:${data.personal.email}`}
+              className="flex items-center gap-3 text-zinc-400 hover:text-white transition-colors group"
+            >
+              <Mail className="w-5 h-5" />
+              <span className="font-mono">{data.personal.email}</span>
+              <span className="text-zinc-600 text-sm">— Email is my preferred communication method</span>
+            </a>
+            
+            <div className="flex items-center gap-3 text-zinc-400">
+              <MapPin className="w-5 h-5" />
+              <span className="font-mono">{data.personal.location}</span>
             </div>
+          </div>
+        </section>
 
-            <div className="max-w-3xl mx-auto pt-6 space-y-6">
-                <header className="flex justify-between items-center">
-                    <h1 className="text-4xl font-bold tracking-tight">About Me</h1>
-                    <ModeToggle />
-                </header>
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Nilambar Elangbam</CardTitle>
-                        <CardDescription>Web Developer & Designer</CardDescription>
-                    </CardHeader>
-                    <CardContent className="flex flex-col md:flex-row gap-6">
-                        <Image
-                            src="/placeholder.svg?height=300&width=300"
-                            alt="Nilambar Elangbam"
-                            width={300}
-                            height={300}
-                            className="rounded-full"
-                        />
-                        <div className="space-y-4">
-                            <p>
-                                I'm a passionate web developer and designer with a focus on creating be`autiful, responsive, and
-                                user-friendly websites. My portfolio showcases my skills in modern web technologies and my ability to
-                                bring designs to life.
-                            </p>
-                            <div className="flex space-x-4">
-                                <Button variant="outline" asChild>
-                                    <a href="https://github.com/neslang-05" target="_blank" rel="noopener noreferrer">
-                                        <Github className="mr-2 h-4 w-4" /> GitHub
-                                    </a>
-                                </Button>
-                                <Button variant="outline" asChild>
-                                    <a
-                                        href="https://www.linkedin.com/in/nilambar-elangbam-524617247/"
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                    >
-                                        <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
-                                    </a>
-                                </Button>
-                                <Button variant="outline" asChild>
-                                    <a href="mailto:neslang.in@gmail.com">
-                                        <Mail className="mr-2 h-4 w-4" /> Email
-                                    </a>
-                                </Button>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
+        {/* Social Links */}
+        <section className="py-12 border-b border-zinc-800">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Connect</h2>
+          
+          <div className="flex flex-wrap gap-4">
+            <a 
+              href={data.social.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 border border-zinc-800 px-4 py-3 hover:border-zinc-600 hover:bg-zinc-950 transition-colors group"
+            >
+              <Github className="w-5 h-5" />
+              <span className="font-mono text-sm">GitHub</span>
+              <ExternalLink className="w-3 h-3 text-zinc-600 group-hover:text-white transition-colors" />
+            </a>
+            <a 
+              href={data.social.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 border border-zinc-800 px-4 py-3 hover:border-zinc-600 hover:bg-zinc-950 transition-colors group"
+            >
+              <Linkedin className="w-5 h-5" />
+              <span className="font-mono text-sm">LinkedIn</span>
+              <ExternalLink className="w-3 h-3 text-zinc-600 group-hover:text-white transition-colors" />
+            </a>
+            <a 
+              href={data.social.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-2 border border-zinc-800 px-4 py-3 hover:border-zinc-600 hover:bg-zinc-950 transition-colors group"
+            >
+              <Instagram className="w-5 h-5" />
+              <span className="font-mono text-sm">Instagram</span>
+              <ExternalLink className="w-3 h-3 text-zinc-600 group-hover:text-white transition-colors" />
+            </a>
+          </div>
+        </section>
 
-                <Card>
-                    <CardHeader>
-                        <CardTitle>Skills & Technologies</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            {["Next.js", "React", "Tailwind CSS", "JavaScript", "TypeScript", "HTML", "CSS", "Git"].map((skill) => (
-                                <Badge key={skill} variant="secondary" className="justify-center">
-                                    {skill}
-                                </Badge>
-                            ))}
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle>About This Portfolio</CardTitle>
-                    </CardHeader>
-                    <CardContent className="space-y-4">
-                        <p>
-                            This portfolio website is built using modern web technologies to showcase my projects, skills, and contact
-                            information. It features a responsive design and a light/dark mode toggle.
-                        </p>
-                        <h3 className="text-lg font-semibold">Key Features:</h3>
-                        <ul className="list-disc list-inside space-y-2">
-                            <li>Light/Dark mode toggle</li>
-                            <li>Responsive design</li>
-                            <li>Project showcase</li>
-                            <li>Contact information</li>
-                            <li>Links to social media profiles</li>
-                        </ul>
-                        <Separator />
-                        <p className="text-sm text-muted-foreground">
-                            Loosely designed in Figma and coded in Visual Studio Code by yours truly. Built with Next.js and Tailwind
-                            CSS, deployed with Vercel. All text is set in the Inter typeface.
-                        </p>
-                    </CardContent>
-                </Card>
-
+        {/* About This Site */}
+        <section className="py-12 border-b border-zinc-800">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">About This Site</h2>
+          
+          <div className="text-zinc-400 space-y-4">
+            <p>
+              This portfolio website is built using modern web technologies. It features a clean, 
+              minimalist design inspired by simplicity and functionality.
+            </p>
+            <div className="border border-zinc-800 p-6 mt-6">
+              <h3 className="font-medium mb-4">Built with</h3>
+              <div className="flex flex-wrap gap-2">
+                {["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Firebase", "Vercel"].map((tech) => (
+                  <span 
+                    key={tech} 
+                    className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-400"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
             </div>
+          </div>
+        </section>
 
-            <Footer />
-        </div>
-    )
+        {/* Quick Links */}
+        <section className="py-12">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Quick Links</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <Link 
+              href="/projects"
+              className="border border-zinc-800 p-4 hover:border-zinc-600 hover:bg-zinc-950 transition-colors"
+            >
+              <h3 className="font-medium mb-1">Projects</h3>
+              <p className="text-zinc-500 text-sm">View my work</p>
+            </Link>
+            <Link 
+              href="/resume"
+              className="border border-zinc-800 p-4 hover:border-zinc-600 hover:bg-zinc-950 transition-colors"
+            >
+              <h3 className="font-medium mb-1">Resume</h3>
+              <p className="text-zinc-500 text-sm">My experience</p>
+            </Link>
+            <Link 
+              href="/blog"
+              className="border border-zinc-800 p-4 hover:border-zinc-600 hover:bg-zinc-950 transition-colors"
+            >
+              <h3 className="font-medium mb-1">Blog</h3>
+              <p className="text-zinc-500 text-sm">Read my writings</p>
+            </Link>
+          </div>
+        </section>
+      </main>
+
+      <Footer />
+    </div>
+  );
 }
 

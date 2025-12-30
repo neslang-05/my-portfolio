@@ -20,7 +20,7 @@
     "autoprefixer": "^10.4.20",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "firebase": "^11.2.0",
+    "firebase": "^11.10.0",
     "lucide": "^0.474.0",
     "lucide-react": "^0.474.0",
     "mongodb": "^6.12.0",
@@ -44,5 +44,17 @@
     "postcss": "^8.5.1",
     "tailwindcss": "^3.4.17",
     "typescript": "^5"
-  }
+  },
+  "description": "This is my personal portfolio website built with Next.js and Tailwind CSS. It showcases my projects, skills, and contact information.",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neslang-05/my-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neslang-05/my-portfolio/issues"
+  },
+  "homepage": "https://github.com/neslang-05/my-portfolio#readme"
 }

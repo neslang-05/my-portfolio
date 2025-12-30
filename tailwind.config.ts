@@ -9,6 +9,10 @@ export default {
   ],
   theme: {
   	extend: {
+  		fontFamily: {
+  			sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+  			mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+  		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
@@ -34,7 +38,8 @@ export default {
   			},
   			accent: {
   				DEFAULT: 'hsl(var(--accent))',
-  				foreground: 'hsl(var(--accent-foreground))'
+  				foreground: 'hsl(var(--accent-foreground))',
+  				warm: 'hsl(var(--accent-warm))',
   			},
   			destructive: {
   				DEFAULT: 'hsl(var(--destructive))',
@@ -52,9 +57,10 @@ export default {
   			}
   		},
   		borderRadius: {
-  			lg: 'var(--radius)',
-  			md: 'calc(var(--radius) - 2px)',
-  			sm: 'calc(var(--radius) - 4px)'
+  			lg: '0',
+  			md: '0',
+  			sm: '0',
+  			DEFAULT: '0',
   		}
   	}
   },

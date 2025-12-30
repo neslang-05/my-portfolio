@@ -1,22 +1,42 @@
-import "./globals.css"
-import { Inter } from "next/font/google"
+import "./globals.css";
+import { JetBrains_Mono, Inter } from "next/font/google";
+import { AuthProvider } from "@/context/AuthContext";
 
-const inter = Inter({ subsets: ["latin"] })
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+});
+
+const jetbrainsMono = JetBrains_Mono({ 
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
 
 export const metadata = {
-  title: "Nilambar Elangbam - Computer Science Student",
-  description: "Personal portfolio of Nilambar Elangbam, a Computer Science student",
-}
+  title: "Nilambar Elangbam — Developer",
+  description: "Computer Science Engineering Student | IoT Developer | Full Stack Web Developer",
+  keywords: ["Nilambar Elangbam", "Developer", "IoT", "Web Development", "Computer Science"],
+  authors: [{ name: "Nilambar Elangbam" }],
+  openGraph: {
+    title: "Nilambar Elangbam — Developer",
+    description: "Computer Science Engineering Student | IoT Developer | Full Stack Web Developer",
+    type: "website",
+  },
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="dark">
+      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-black text-white min-h-screen`}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
+      </body>
     </html>
-  )
+  );
 }
 

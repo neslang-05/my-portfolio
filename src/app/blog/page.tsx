@@ -1,38 +1,141 @@
-"use client";
-import { SubscribeForm } from "@/components/subscribe-form"
-import { BlogPosts } from "@/components/blog-post"
-import NavbarSet from "@/components/ui/navbar-set";
-import Footer from "@/components/ui/footer";
+import { Navbar } from "@/components/navbar";
+import { Footer } from "@/components/footer";
+import { Mail, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
-export default function Page() {
+export const metadata = {
+  title: "Blog — Nilambar Elangbam",
+  description: "Thoughts on technology, development, and life.",
+};
+
+// Blog posts data (will be fetched from Firebase in production)
+const blogPosts = [
+  {
+    id: "1",
+    title: "Building an ALPR System with Raspberry Pi",
+    excerpt: "A deep dive into creating an Automatic License Plate Recognition system using Raspberry Pi and Google Cloud Vision API.",
+    date: "Dec 2024",
+    tags: ["IoT", "Raspberry Pi", "Cloud"],
+    slug: "alpr-raspberry-pi",
+  },
+  {
+    id: "2",
+    title: "Getting Started with LoRa for IoT Projects",
+    excerpt: "An introduction to LoRa technology and how to use it for long-range IoT communication.",
+    date: "Nov 2024",
+    tags: ["IoT", "LoRa", "Hardware"],
+    slug: "lora-iot-getting-started",
+  },
+  {
+    id: "3",
+    title: "My Journey into Full Stack Development",
+    excerpt: "Reflecting on my path from a curious student to building full-stack web applications.",
+    date: "Oct 2024",
+    tags: ["Personal", "Web Dev"],
+    slug: "fullstack-journey",
+  },
+];
+
+export default function BlogPage() {
   return (
-    <div className="min-h-screen">
-      <main className="max-w-2xl mx-auto px-4 py-12">
-        <div className="flex flex-row justify-center py-4">
-          <NavbarSet />
-        </div>
-        <header className="mb-12">
-          <h1 className="text-2xl font-normal text-gray-900 mb-4">ashu.me - a blog by Nilambar Elangbam</h1>
-          <p className="text-gray-600 mb-8">
-            Bi-weekly updates about things that interest me, things I have built and things I have learned.
+    <div className="min-h-screen bg-black text-white">
+      <Navbar />
+      
+      <main className="max-w-4xl mx-auto px-6 py-12">
+        {/* Header */}
+        <header className="py-8 border-b border-zinc-800">
+          <h1 className="text-4xl font-bold tracking-tight mb-4">Blog</h1>
+          <p className="text-zinc-400 max-w-2xl">
+            Thoughts on technology, development, IoT, and everything else I find interesting.
           </p>
-          <SubscribeForm />
-          <div className="mt-6">
-            <a href="#" className="text-gray-500 hover:text-gray-700">
-              Previous issues
-            </a>
-          </div>
         </header>
 
-        <section>
-          <h2 className="text-2xl font-normal text-gray-900 mb-8">
-            Recent posts on SwiftUI, React, and everything else I write about
-          </h2>
-          <BlogPosts />
+        {/* Newsletter Subscribe */}
+        <section className="py-8 border-b border-zinc-800">
+          <div className="border border-zinc-800 p-6">
+            <h2 className="text-lg font-bold mb-2">Subscribe to updates</h2>
+            <p className="text-zinc-500 text-sm mb-4">
+              Get notified when I publish something new. No spam, unsubscribe anytime.
+            </p>
+            <form className="flex gap-2">
+              <div className="flex-1 relative">
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+                <input
+                  type="email"
+                  placeholder="your@email.com"
+                  className="w-full bg-black border border-zinc-800 px-10 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 font-mono text-sm"
+                />
+              </div>
+              <button
+                type="submit"
+                className="bg-white text-black px-6 py-3 font-bold hover:bg-zinc-200 transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </section>
+
+        {/* Blog Posts */}
+        <section className="py-12">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Recent Posts</h2>
+          
+          <div className="space-y-1">
+            {blogPosts.map((post) => (
+              <Link
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="flex items-start justify-between py-6 border-b border-zinc-900 hover:bg-zinc-950 -mx-4 px-4 transition-colors group"
+              >
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <h3 className="font-medium text-lg group-hover:text-white transition-colors">{post.title}</h3>
+                    <ArrowRight className="w-4 h-4 text-zinc-600 group-hover:text-white transition-colors opacity-0 group-hover:opacity-100" />
+                  </div>
+                  <p className="text-zinc-500 text-sm mt-2 max-w-xl">{post.excerpt}</p>
+                  <div className="flex gap-2 mt-3">
+                    {post.tags.map((tag) => (
+                      <span 
+                        key={tag} 
+                        className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <span className="text-xs font-mono text-zinc-600 ml-4 flex-shrink-0">{post.date}</span>
+              </Link>
+            ))}
+          </div>
+
+          {/* Empty State */}
+          {blogPosts.length === 0 && (
+            <div className="text-center py-12">
+              <p className="text-zinc-500">No blog posts yet. Check back soon!</p>
+            </div>
+          )}
+        </section>
+
+        {/* Tags Section */}
+        <section className="py-12 border-t border-zinc-800">
+          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Topics</h2>
+          <div className="flex flex-wrap gap-2">
+            {["IoT", "Web Development", "AI", "Hardware", "Cloud", "Personal", "Tutorial"].map((tag) => (
+              <Link
+                key={tag}
+                href={`/tags/${tag.toLowerCase().replace(' ', '-')}`}
+                className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
+              >
+                {tag}
+              </Link>
+            ))}
+          </div>
         </section>
       </main>
+
       <Footer />
     </div>
-  )
+  );
 }
 
