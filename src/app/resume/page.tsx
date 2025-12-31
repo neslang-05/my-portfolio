@@ -12,6 +12,8 @@ export const metadata = {
 export default function ResumePage() {
   const data = getSiteData();
 
+  const resumeHref = data.personal.resumeUrl || '/resume.pdf';
+
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
@@ -24,7 +26,7 @@ export default function ResumePage() {
             <p className="text-zinc-400">{data.personal.title}</p>
           </div>
           <a
-            href="/Nilambar_Elangbam_Resume.pdf"
+            href={resumeHref}
             download
             className="bg-white text-black px-6 py-3 font-bold hover:bg-zinc-200 transition-colors flex items-center gap-2"
           >

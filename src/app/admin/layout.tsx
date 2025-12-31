@@ -1,7 +1,7 @@
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import Link from 'next/link';
 import { 
@@ -25,15 +25,30 @@ export default function AdminLayout({
 }) {
   const { user, isAdmin, loading, logout } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
+  const [collapsed, setCollapsed] = useState(false);
+
+  const isLoginPage = pathname?.startsWith('/admin/login');
 
   useEffect(() => {
+    if (isLoginPage) return; // Allow the login page to render without redirects
+
     if (!loading && !user) {
       router.push('/admin/login');
     }
     if (!loading && user && !isAdmin) {
       router.push('/');
     }
-  }, [user, isAdmin, loading, router]);
+  }, [user, isAdmin, loading, router, isLoginPage]);
+
+  if (isLoginPage) {
+    // Render login page without admin chrome or auth gating
+    return (
+      <div className="min-h-screen bg-black text-white">
+        {children}
+      </div>
+    );
+  }
 
   if (loading) {
     return (
@@ -66,26 +81,35 @@ export default function AdminLayout({
   return (
     <div className="min-h-screen bg-black text-white flex">
       {/* Sidebar */}
-      <aside className="w-64 border-r border-zinc-800 flex flex-col">
+      <aside
+        className={`${collapsed ? 'w-20' : 'w-64'} sticky top-0 h-screen border-r border-zinc-800 flex flex-col bg-black/90 backdrop-blur-sm`}
+      >
         {/* Logo */}
-        <div className="p-6 border-b border-zinc-800">
+        <div className="p-4 border-b border-zinc-800 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
             <span className="font-bold text-lg">NE</span>
-            <span className="text-zinc-500 text-sm font-mono">/ admin</span>
+            {!collapsed && <span className="text-zinc-500 text-sm font-mono">/ admin</span>}
           </Link>
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="text-zinc-500 hover:text-white p-2"
+            aria-label={collapsed ? 'Expand sidebar' : 'Collapse sidebar'}
+          >
+            {collapsed ? '›' : '‹'}
+          </button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 p-4">
+        <nav className="flex-1 p-3 overflow-y-auto">
           <ul className="space-y-1">
             {menuItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"
+                  className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors rounded"
                 >
                   <item.icon className="w-4 h-4" />
-                  {item.label}
+                  {!collapsed && item.label}
                 </Link>
               </li>
             ))}
@@ -93,26 +117,26 @@ export default function AdminLayout({
         </nav>
 
         {/* Footer */}
-        <div className="p-4 border-t border-zinc-800">
+        <div className="p-3 border-t border-zinc-800 space-y-2">
           <Link
             href="/"
-            className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors"
+            className="flex items-center gap-3 px-3 py-2 text-sm text-zinc-400 hover:text-white hover:bg-zinc-900 transition-colors rounded"
           >
             <Home className="w-4 h-4" />
-            View Site
+            {!collapsed && 'View Site'}
           </Link>
           <button
             onClick={handleLogout}
-            className="w-full flex items-center gap-3 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-zinc-900 transition-colors"
+            className="w-full flex items-center gap-3 px-3 py-2 text-sm text-red-400 hover:text-red-300 hover:bg-zinc-900 transition-colors rounded"
           >
             <LogOut className="w-4 h-4" />
-            Sign Out
+            {!collapsed && 'Sign Out'}
           </button>
         </div>
       </aside>
 
       {/* Main content */}
-      <main className="flex-1 overflow-auto">
+      <main className="flex-1 overflow-auto min-h-screen">
         {children}
       </main>
     </div>

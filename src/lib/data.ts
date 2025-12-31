@@ -3,6 +3,7 @@
 
 export interface Project {
   id: string;
+  slug: string;
   title: string;
   description: string;
   technologies: string[];
@@ -75,6 +76,7 @@ Currently, I'm a third-year Computer Science and Engineering student at Manipur 
 In the past, I've delved into architecture design using SketchUp, explored automation, and worked on research projects involving database optimization and statistical analysis. My curiosity has led me to blend creative pursuits like drawing and exploring maps with my technical expertise.
 
 When I'm not coding, you'll find me sketching, walking long trails, or planning new adventures—like my upcoming solo trip across Southeast Asia. I'm eager to learn, grow, and build solutions that make a difference.`,
+    resumeUrl: '/resume.pdf',
   },
   social: {
     github: 'https://github.com/neslang-05',
@@ -164,6 +166,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
   projects: [
     {
       id: '1',
+      slug: 'alpr-system',
       title: 'ALPR System',
       description: 'Automatic License Plate Recognition using Raspberry Pi 4 with Google Cloud Vision API integration and a web dashboard for monitoring.',
       technologies: ['Python', 'Raspberry Pi', 'Google Cloud', 'Flask', 'OpenCV'],
@@ -173,6 +176,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '2',
+      slug: 'zenith',
       title: 'Zenith',
       description: 'A comprehensive web-based result management system for educational institutions with student and admin dashboards.',
       technologies: ['TypeScript', 'Next.js', 'React', 'Prisma', 'PostgreSQL'],
@@ -182,6 +186,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '3',
+      slug: 'skillswap',
       title: 'SkillSwap',
       description: 'A peer-to-peer skill barter platform connecting students to exchange knowledge and learn from each other.',
       technologies: ['TypeScript', 'Next.js', 'React', 'MongoDB'],
@@ -191,6 +196,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '4',
+      slug: 'weather-station-lora',
       title: 'Weather Station (LoRa)',
       description: 'Distributed weather monitoring system using LoRa wireless technology for long-range data transmission.',
       technologies: ['JavaScript', 'LoRa', 'ESP32', 'Node.js'],
@@ -200,6 +206,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '5',
+      slug: 'envapp',
       title: 'EnvApp',
       description: 'Environmental monitoring application for tracking and analyzing environmental data.',
       technologies: ['JavaScript', 'React', 'Node.js'],
@@ -209,6 +216,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '6',
+      slug: 'cattlehealth',
       title: 'CattleHealth',
       description: 'IoT-based cattle health monitoring system using sensors for early disease detection.',
       technologies: ['C++', 'Arduino', 'Sensors'],
@@ -218,6 +226,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '7',
+      slug: 'latex-converter',
       title: 'LaTeX Converter',
       description: 'Python tool that converts various document formats (DOCX, PDF, Markdown) into LaTeX format with a Streamlit web interface.',
       technologies: ['Python', 'Streamlit', 'LaTeX'],
@@ -227,6 +236,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '8',
+      slug: 'dynamic-ai-chatbot',
       title: 'Dynamic AI Chatbot',
       description: 'An intelligent chatbot built with Python capable of dynamic conversations.',
       technologies: ['Python', 'NLP', 'Machine Learning'],
@@ -236,6 +246,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '9',
+      slug: 'stock-market-forecasting',
       title: 'Stock Market Forecasting',
       description: 'Stock market prediction and analysis using machine learning techniques.',
       technologies: ['Python', 'Jupyter', 'Pandas', 'scikit-learn'],
@@ -245,6 +256,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '10',
+      slug: 'aqi-prediction',
       title: 'AQI Prediction',
       description: 'Air Quality Index prediction using data science and machine learning models.',
       technologies: ['Python', 'Jupyter', 'Data Science'],
@@ -254,6 +266,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '11',
+      slug: 'document-archive',
       title: 'Document Archive',
       description: 'Document management and archival system for organizing digital documents.',
       technologies: ['TypeScript', 'Next.js'],
@@ -263,6 +276,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '12',
+      slug: 'plms',
       title: 'PLMS',
       description: 'Project and Learning Management System for educational purposes.',
       technologies: ['TypeScript', 'Next.js'],
@@ -272,6 +286,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '13',
+      slug: 'homelab',
       title: 'HomeLAB',
       description: 'Home laboratory setup documentation and automation scripts.',
       technologies: ['HTML', 'Docker', 'Linux'],
@@ -281,6 +296,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '14',
+      slug: 'sgpa-calculator',
       title: 'SGPA Calculator',
       description: 'A utility tool for calculating Semester Grade Point Average.',
       technologies: ['TypeScript', 'React'],
@@ -290,6 +306,7 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
     },
     {
       id: '15',
+      slug: 'image-background-remover',
       title: 'Image Background Remover',
       description: 'Python GUI application for removing backgrounds from images.',
       technologies: ['Python', 'OpenCV', 'Tkinter'],

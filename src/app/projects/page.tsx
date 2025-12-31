@@ -1,7 +1,8 @@
 import { getSiteData } from "@/lib/data";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ArrowUpRight, Filter } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import Link from "next/link";
 
 export const metadata = {
   title: "Projects — Nilambar Elangbam",
@@ -45,11 +46,9 @@ export default function ProjectsPage() {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {projects.filter(p => p.featured).map((project) => (
-              <a
+              <Link
                 key={project.id}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/projects/${project.id}`}
                 className="border border-zinc-800 p-6 hover:border-zinc-600 hover:bg-zinc-950 transition-colors group"
               >
                 <div className="flex items-start justify-between mb-3">
@@ -70,7 +69,7 @@ export default function ProjectsPage() {
                 <div className="mt-4 pt-4 border-t border-zinc-900">
                   <span className="text-xs font-mono text-zinc-600 uppercase">{project.category}</span>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
@@ -82,11 +81,9 @@ export default function ProjectsPage() {
           {/* Project List */}
           <div className="space-y-1">
             {projects.map((project) => (
-              <a
+              <Link
                 key={project.id}
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`/projects/${project.slug}`}
                 className="flex items-start justify-between py-4 border-b border-zinc-900 hover:bg-zinc-950 -mx-4 px-4 transition-colors group"
               >
                 <div className="flex-1">
@@ -112,7 +109,7 @@ export default function ProjectsPage() {
                     ))}
                   </div>
                 </div>
-              </a>
+              </Link>
             ))}
           </div>
         </section>
