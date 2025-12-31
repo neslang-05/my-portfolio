@@ -12,13 +12,12 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-// Avoid initializing Firebase during SSR/prerender when env vars are absent.
-const isBrowser = typeof window !== 'undefined';
-
+// Lazy, client-only initialization so SSR doesn't freeze auth at null
 let app: FirebaseApp | null = null;
-function initFirebase(): FirebaseApp | null {
-  if (!isBrowser) return null;
-  if (!firebaseConfig.apiKey) return null; // Missing env vars; skip to prevent build errors.
+
+function getFirebaseApp(): FirebaseApp | null {
+  if (typeof window === 'undefined') return null;
+  if (!firebaseConfig.apiKey) return null; // env missing
 
   if (!app) {
     app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
@@ -26,15 +25,22 @@ function initFirebase(): FirebaseApp | null {
   return app;
 }
 
-const firebaseApp = initFirebase();
-export const auth: Auth | null = firebaseApp ? getAuth(firebaseApp) : null;
-export const db: Firestore | null = firebaseApp ? getFirestore(firebaseApp) : null;
+export function getAuthClient(): Auth | null {
+  const firebaseApp = getFirebaseApp();
+  return firebaseApp ? getAuth(firebaseApp) : null;
+}
+
+export function getDbClient(): Firestore | null {
+  const firebaseApp = getFirebaseApp();
+  return firebaseApp ? getFirestore(firebaseApp) : null;
+}
 
 // Admin email
 export const ADMIN_EMAIL = 'neslang.in@gmail.com';
 
 // Sign in with email and password
 export async function signIn(email: string, password: string): Promise<{ success: boolean; error?: string }> {
+  const auth = getAuthClient();
   if (!auth) {
     return { success: false, error: 'Auth unavailable' };
   }

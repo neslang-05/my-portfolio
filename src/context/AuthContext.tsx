@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
 import { User, onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth, ADMIN_EMAIL } from '@/lib/firebase';
+import { getAuthClient, ADMIN_EMAIL } from '@/lib/firebase';
 
 interface AuthContextType {
   user: User | null;
@@ -23,6 +23,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const auth = getAuthClient();
     if (!auth) {
       setLoading(false);
       return;
@@ -39,6 +40,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const isAdmin = user?.email === ADMIN_EMAIL;
 
   const logout = async () => {
+    const auth = getAuthClient();
     if (!auth) return;
     await signOut(auth);
   };
