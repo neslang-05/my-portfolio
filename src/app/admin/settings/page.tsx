@@ -2,18 +2,62 @@
 
 import { useState } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { Save, RefreshCw, Trash2, AlertTriangle } from 'lucide-react';
+import { Save, RefreshCw, Trash2, AlertTriangle, Download, Upload, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
+import { getSiteData } from '@/lib/data';
+import { fetchSiteData, updateSiteData } from '@/lib/siteData';
 
 export default function AdminSettingsPage() {
   const { user } = useAuth();
   const [syncing, setSyncing] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'saved' | 'error'>('idle');
+  const [error, setError] = useState('');
 
   const handleSync = async () => {
     setSyncing(true);
-    // Simulate sync
-    await new Promise(resolve => setTimeout(resolve, 2000));
-    setSyncing(false);
-    alert('Data synced successfully!');
+    setStatus('idle');
+    setError('');
+    try {
+      const localData = getSiteData();
+      await updateSiteData(localData, user?.email);
+      setStatus('saved');
+    } catch (err) {
+      console.error('Sync failed', err);
+      setError('Sync failed. Please try again.');
+      setStatus('error');
+    } finally {
+      setSyncing(false);
+    }
+  };
+
+  const handleExport = async () => {
+    try {
+      const data = await fetchSiteData();
+      const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'portfolio-data.json';
+      a.click();
+      URL.revokeObjectURL(url);
+    } catch (err) {
+      console.error('Export failed', err);
+      alert('Export failed');
+    }
+  };
+
+  const handleImport = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      await updateSiteData(data, user?.email);
+      setStatus('saved');
+      alert('Data imported successfully!');
+    } catch (err) {
+      console.error('Import failed', err);
+      alert('Import failed. Invalid JSON.');
+    }
   };
 
   return (
@@ -25,6 +69,20 @@ export default function AdminSettingsPage() {
           Manage your site settings and preferences
         </p>
       </div>
+
+      {error && (
+        <div className="mb-4 flex items-center gap-2 rounded border border-red-900/50 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+          <AlertCircle className="h-4 w-4" />
+          {error}
+        </div>
+      )}
+
+      {status === 'saved' && !error && (
+        <div className="mb-4 flex items-center gap-2 rounded border border-emerald-900/50 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
+          <CheckCircle2 className="h-4 w-4" />
+          Operation completed successfully.
+        </div>
+      )}
 
       <div className="max-w-2xl space-y-8">
         {/* Account Info */}
@@ -51,14 +109,14 @@ export default function AdminSettingsPage() {
             <div className="flex items-center justify-between py-3 border-b border-zinc-900">
               <div>
                 <p className="font-medium">Sync Data</p>
-                <p className="text-zinc-500 text-sm">Sync local data with Firestore</p>
+                <p className="text-zinc-500 text-sm">Push local defaults to Firestore</p>
               </div>
               <button
                 onClick={handleSync}
                 disabled={syncing}
                 className="bg-zinc-800 text-white px-4 py-2 hover:bg-zinc-700 transition-colors flex items-center gap-2 disabled:opacity-50"
               >
-                <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
+                {syncing ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4" />}
                 {syncing ? 'Syncing...' : 'Sync Now'}
               </button>
             </div>
@@ -68,7 +126,11 @@ export default function AdminSettingsPage() {
                 <p className="font-medium">Export Data</p>
                 <p className="text-zinc-500 text-sm">Download all your data as JSON</p>
               </div>
-              <button className="bg-zinc-800 text-white px-4 py-2 hover:bg-zinc-700 transition-colors">
+              <button
+                onClick={handleExport}
+                className="bg-zinc-800 text-white px-4 py-2 hover:bg-zinc-700 transition-colors flex items-center gap-2"
+              >
+                <Download className="w-4 h-4" />
                 Export
               </button>
             </div>
@@ -78,9 +140,11 @@ export default function AdminSettingsPage() {
                 <p className="font-medium">Import Data</p>
                 <p className="text-zinc-500 text-sm">Import data from a JSON file</p>
               </div>
-              <button className="bg-zinc-800 text-white px-4 py-2 hover:bg-zinc-700 transition-colors">
+              <label className="bg-zinc-800 text-white px-4 py-2 hover:bg-zinc-700 transition-colors flex items-center gap-2 cursor-pointer">
+                <Upload className="w-4 h-4" />
                 Import
-              </button>
+                <input type="file" accept=".json" onChange={handleImport} className="hidden" />
+              </label>
             </div>
           </div>
         </div>
