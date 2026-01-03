@@ -1,16 +1,21 @@
-import { getSiteData } from "@/lib/data";
+"use client";
+
+import { useSiteData } from "@/context/SiteDataContext";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { Download, Github, Linkedin, Instagram, Mail, Phone, MapPin, Calendar, Briefcase, GraduationCap, Code } from "lucide-react";
+import { Download, Github, Linkedin, Instagram, Mail, Phone, MapPin, Calendar, Briefcase, GraduationCap, Code, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Resume — Nilambar Elangbam",
-  description: "Interactive resume of Nilambar Elangbam - Computer Science Engineering Student",
-};
-
 export default function ResumePage() {
-  const data = getSiteData();
+  const { data, loading } = useSiteData();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+      </div>
+    );
+  }
 
   const resumeHref = data.personal.resumeUrl || '/resume.pdf';
 

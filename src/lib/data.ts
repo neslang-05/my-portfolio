@@ -38,6 +38,17 @@ export interface Skill {
   items: string[];
 }
 
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  date: string;
+  tags: string[];
+  published: boolean;
+}
+
 export interface SiteData {
   personal: {
     name: string;
@@ -59,6 +70,7 @@ export interface SiteData {
   education: Education[];
   experience: Experience[];
   projects: Project[];
+  blogPosts: BlogPost[];
 }
 
 // Default site data based on resume
@@ -313,6 +325,38 @@ When I'm not coding, you'll find me sketching, walking long trails, or planning 
       github: 'https://github.com/neslang-05/image-bg-remove-gui.py',
       featured: false,
       category: 'tools',
+    },
+  ],
+  blogPosts: [
+    {
+      id: '1',
+      title: 'Building an ALPR System with Raspberry Pi',
+      slug: 'alpr-raspberry-pi',
+      excerpt: 'A deep dive into creating an Automatic License Plate Recognition system using Raspberry Pi and Google Cloud Vision API.',
+      content: '',
+      date: 'Dec 2024',
+      tags: ['IoT', 'Raspberry Pi', 'Cloud'],
+      published: true,
+    },
+    {
+      id: '2',
+      title: 'Getting Started with LoRa for IoT Projects',
+      slug: 'lora-iot-getting-started',
+      excerpt: 'An introduction to LoRa technology and how to use it for long-range IoT communication.',
+      content: '',
+      date: 'Nov 2024',
+      tags: ['IoT', 'LoRa', 'Hardware'],
+      published: true,
+    },
+    {
+      id: '3',
+      title: 'My Journey into Full Stack Development',
+      slug: 'fullstack-journey',
+      excerpt: 'Reflecting on my path from a curious student to building full-stack web applications.',
+      content: '',
+      date: 'Oct 2024',
+      tags: ['Personal', 'Web Dev'],
+      published: true,
     },
   ],
 };

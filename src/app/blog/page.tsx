@@ -1,40 +1,27 @@
+"use client";
+
+import { useSiteData } from "@/context/SiteDataContext";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { Mail, ArrowRight } from "lucide-react";
+import { Mail, ArrowRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Blog — Nilambar Elangbam",
-  description: "Thoughts on technology, development, and life.",
-};
+export default function BlogPage() {
+  const { data, loading } = useSiteData();
 
-// Blog posts data (will be fetched from Firebase in production)
-const blogPosts = [
-  {
-    id: "1",
-    title: "Building an ALPR System with Raspberry Pi",
-    excerpt: "A deep dive into creating an Automatic License Plate Recognition system using Raspberry Pi and Google Cloud Vision API.",
-    date: "Dec 2024",
-    tags: ["IoT", "Raspberry Pi", "Cloud"],
-    slug: "alpr-raspberry-pi",
-  },
-  {
-    id: "2",
-    title: "Getting Started with LoRa for IoT Projects",
-    excerpt: "An introduction to LoRa technology and how to use it for long-range IoT communication.",
-    date: "Nov 2024",
-    tags: ["IoT", "LoRa", "Hardware"],
-    slug: "lora-iot-getting-started",
-  },
-  {
-    id: "3",
-    title: "My Journey into Full Stack Development",
-    excerpt: "Reflecting on my path from a curious student to building full-stack web applications.",
-    date: "Oct 2024",
-    tags: ["Personal", "Web Dev"],
-    slug: "fullstack-journey",
-  },
-];
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+      </div>
+    );
+  }
+
+  const blogPosts = data.blogPosts || [];
+  const publishedPosts = blogPosts.filter(post => post.published);
+
+  // Get all unique tags
+  const allTags = [...new Set(publishedPosts.flatMap(post => post.tags))];
 
 export default function BlogPage() {
   return (
@@ -81,7 +68,7 @@ export default function BlogPage() {
           <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Recent Posts</h2>
           
           <div className="space-y-1">
-            {blogPosts.map((post) => (
+            {publishedPosts.map((post) => (
               <Link
                 key={post.id}
                 href={`/blog/${post.slug}`}
@@ -110,7 +97,7 @@ export default function BlogPage() {
           </div>
 
           {/* Empty State */}
-          {blogPosts.length === 0 && (
+          {publishedPosts.length === 0 && (
             <div className="text-center py-12">
               <p className="text-zinc-500">No blog posts yet. Check back soon!</p>
             </div>
@@ -118,20 +105,22 @@ export default function BlogPage() {
         </section>
 
         {/* Tags Section */}
-        <section className="py-12 border-t border-zinc-800">
-          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Topics</h2>
-          <div className="flex flex-wrap gap-2">
-            {["IoT", "Web Development", "AI", "Hardware", "Cloud", "Personal", "Tutorial"].map((tag) => (
-              <Link
-                key={tag}
-                href={`/tags/${tag.toLowerCase().replace(' ', '-')}`}
-                className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
-              >
-                {tag}
-              </Link>
-            ))}
-          </div>
-        </section>
+        {allTags.length > 0 && (
+          <section className="py-12 border-t border-zinc-800">
+            <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Topics</h2>
+            <div className="flex flex-wrap gap-2">
+              {allTags.map((tag) => (
+                <Link
+                  key={tag}
+                  href={`/tags/${tag.toLowerCase().replace(' ', '-')}`}
+                  className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          </section>
+        )}
       </main>
 
       <Footer />

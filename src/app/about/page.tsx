@@ -1,16 +1,21 @@
-import { getSiteData } from "@/lib/data";
+"use client";
+
+import { useSiteData } from "@/context/SiteDataContext";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { Github, Linkedin, Instagram, Mail, MapPin, ExternalLink } from "lucide-react";
+import { Github, Linkedin, Instagram, Mail, MapPin, ExternalLink, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "About — Nilambar Elangbam",
-  description: "Learn more about Nilambar Elangbam, a Computer Science Engineering Student",
-};
-
 export default function AboutPage() {
-  const data = getSiteData();
+  const { data, loading } = useSiteData();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">

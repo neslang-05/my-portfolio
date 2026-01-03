@@ -114,7 +114,7 @@ export default function AdminLayout({
 
       {/* Sidebar */}
       <aside
-        className={`${collapsed ? 'md:w-20' : 'md:w-64'} ${mobileOpen ? 'fixed inset-y-0 left-0 w-64 z-40' : 'hidden'} md:flex sticky md:static top-0 h-screen border-r border-zinc-800 flex-col bg-black/90 backdrop-blur-sm`}
+        className={`${collapsed ? 'md:w-20' : 'md:w-64'} ${mobileOpen ? 'fixed inset-y-0 left-0 w-64 z-40' : 'hidden'} md:flex md:sticky top-0 h-screen border-r border-zinc-800 flex-col bg-black/90 backdrop-blur-sm flex-shrink-0`}
       >
         {/* Logo */}
         <div className="p-4 border-b border-zinc-800 flex items-center justify-between">

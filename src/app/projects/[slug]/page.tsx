@@ -1,22 +1,37 @@
+"use client";
+
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { getSiteData } from "@/lib/data";
+import { useParams, useRouter } from "next/navigation";
+import { useSiteData } from "@/context/SiteDataContext";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ArrowUpRight, Github, Tag } from "lucide-react";
+import { ArrowUpRight, Github, Tag, Loader2 } from "lucide-react";
+import { useEffect } from "react";
 
-interface ProjectPageProps {
-  params: Promise<{ slug: string }> | { slug: string };
-}
+export default function ProjectDetailPage() {
+  const params = useParams();
+  const router = useRouter();
+  const slug = params.slug as string;
 
-export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-
-  const data = getSiteData();
+  const { data, loading } = useSiteData();
   const project = data.projects.find((p) => p.slug === slug || p.id === slug);
 
+  useEffect(() => {
+    if (!loading && !project) {
+      router.push("https://github.com/neslang-05");
+    }
+  }, [loading, project, router]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+      </div>
+    );
+  }
+
   if (!project) {
-    return redirect("https://github.com/neslang-05");
+    return null;
   }
 
   return (
@@ -69,7 +84,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             ← Back to projects
           </Link>
           {project.github && (
-            <Link
+            <a
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
@@ -77,7 +92,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             >
               GitHub
               <ArrowUpRight className="w-4 h-4" />
-            </Link>
+            </a>
           )}
         </div>
       </main>

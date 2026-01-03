@@ -22,6 +22,7 @@ function mergeSiteData(remote: Partial<SiteData> | undefined): SiteData {
     education: remote.education ?? defaultSiteData.education,
     experience: remote.experience ?? defaultSiteData.experience,
     projects: remote.projects ?? defaultSiteData.projects,
+    blogPosts: remote.blogPosts ?? defaultSiteData.blogPosts,
   };
 }
 

@@ -1,6 +1,7 @@
 import "./globals.css";
 import { JetBrains_Mono, Inter } from "next/font/google";
 import { AuthProvider } from "@/context/AuthContext";
+import { SiteDataProvider } from "@/context/SiteDataContext";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -33,7 +34,9 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans bg-black text-white min-h-screen`}>
         <AuthProvider>
-          {children}
+          <SiteDataProvider>
+            {children}
+          </SiteDataProvider>
         </AuthProvider>
       </body>
     </html>

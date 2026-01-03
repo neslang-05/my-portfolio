@@ -1,11 +1,21 @@
+"use client";
+
 import Link from "next/link";
-import { getSiteData } from "@/lib/data";
-import { ArrowUpRight, Github, Linkedin, Instagram, Mail, MapPin, Download, ArrowRight } from "lucide-react";
+import { useSiteData } from "@/context/SiteDataContext";
+import { ArrowUpRight, Github, Linkedin, Instagram, Mail, MapPin, Download, ArrowRight, Loader2 } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 
 export default function Home() {
-  const data = getSiteData();
+  const { data, loading } = useSiteData();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -15,7 +25,7 @@ export default function Home() {
         {/* Hero Section */}
         <header className="py-16 border-b border-zinc-800">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Hi, my name is {data.personal.name.split(' ')[0]}.
+            Hi, am {data.personal.name.split(' ')[0]}.
           </h1>
           <p className="text-xl text-zinc-400 max-w-2xl leading-relaxed">
             {data.personal.title}. I build IoT systems, web applications, and solutions 

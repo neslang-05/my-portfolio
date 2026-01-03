@@ -1,30 +1,23 @@
-import { getSiteData } from "@/lib/data";
+"use client";
+
+import { useSiteData } from "@/context/SiteDataContext";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { ArrowUpRight } from "lucide-react";
+import { ArrowUpRight, Loader2 } from "lucide-react";
 import Link from "next/link";
 
-export const metadata = {
-  title: "Projects — Nilambar Elangbam",
-  description: "Explore my projects in IoT, web development, AI, and more.",
-};
-
 export default function ProjectsPage() {
-  const data = getSiteData();
-  const projects = data.projects;
+  const { data, loading } = useSiteData();
 
-  // Group projects by category
-  const categories = ['all', 'web', 'iot', 'ai', 'data', 'tools', 'other'] as const;
-  
-  const categoryLabels: Record<string, string> = {
-    all: 'All',
-    web: 'Web Development',
-    iot: 'IoT & Hardware',
-    ai: 'AI & ML',
-    data: 'Data Science',
-    tools: 'Tools & Utilities',
-    other: 'Other',
-  };
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+      </div>
+    );
+  }
+
+  const projects = data.projects;
 
   return (
     <div className="min-h-screen bg-black text-white">
@@ -119,7 +112,7 @@ export default function ProjectsPage() {
           <div className="text-center">
             <p className="text-zinc-400 mb-4">Want to see more?</p>
             <a
-              href="https://github.com/neslang-05"
+              href={data.social.github}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-white text-black px-6 py-3 font-bold hover:bg-zinc-200 transition-colors"
