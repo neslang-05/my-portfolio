@@ -23,7 +23,6 @@ export default function BlogPage() {
   // Get all unique tags
   const allTags = [...new Set(publishedPosts.flatMap(post => post.tags))];
 
-export default function BlogPage() {
   return (
     <div className="min-h-screen bg-black text-white">
       <Navbar />
