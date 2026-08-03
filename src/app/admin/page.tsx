@@ -21,7 +21,7 @@ export default function AdminDashboard() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Dashboard</h1>
-        <p className="text-zinc-500 mt-1 font-mono text-sm">
+        <p className="text-zinc-500 mt-1 font-sans text-sm">
           Welcome back, {user?.email}
         </p>
       </div>
@@ -38,7 +38,7 @@ export default function AdminDashboard() {
               <stat.icon className="w-5 h-5 text-zinc-500 group-hover:text-white transition-colors" />
               <span className="text-3xl font-bold">{stat.value}</span>
             </div>
-            <p className="text-zinc-400 text-sm font-mono">{stat.label}</p>
+            <p className="text-zinc-400 text-sm font-sans">{stat.label}</p>
           </Link>
         ))}
       </div>
@@ -86,7 +86,7 @@ export default function AdminDashboard() {
             >
               <div>
                 <p className="font-medium">{project.title}</p>
-                <p className="text-zinc-500 text-sm font-mono">{project.category}</p>
+                <p className="text-zinc-500 text-sm font-sans">{project.category}</p>
               </div>
               <div className="flex gap-2">
                 {project.technologies.slice(0, 3).map((tech) => (

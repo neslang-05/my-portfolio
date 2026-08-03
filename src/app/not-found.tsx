@@ -8,7 +8,7 @@ export default function NotFoundPage() {
       <Navbar />
       <main className="flex-1 flex items-center justify-center px-6 py-20">
         <div className="max-w-lg text-center space-y-6">
-          <p className="text-sm font-mono text-zinc-500">Error 404</p>
+          <p className="text-sm font-sans text-zinc-500">Error 404</p>
           <h1 className="text-4xl font-bold">Page not found</h1>
           <p className="text-zinc-400">
             The page you’re looking for doesn’t exist. Check the URL or head back to a safe place.

@@ -20,10 +20,10 @@ export function SubscribeForm() {
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        className="flex-1 bg-white"
+        className="flex-1 bg-black text-white border border-zinc-800"
         required
       />
-      <Button type="submit" variant="default" className="bg-gray-700 hover:bg-gray-800">
+      <Button type="submit" variant="default" className="bg-white text-black hover:bg-zinc-200 font-bold">
         Subscribe
       </Button>
     </form>

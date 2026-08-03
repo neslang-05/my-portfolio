@@ -111,7 +111,7 @@ export default function AdminExperiencePage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Experience</h1>
-          <p className="text-zinc-500 mt-1 font-mono text-sm">Manage your work experience</p>
+          <p className="text-zinc-500 mt-1 font-sans text-sm">Manage your work experience</p>
         </div>
         <button
           onClick={() => setIsAdding(true)}
@@ -124,15 +124,15 @@ export default function AdminExperiencePage() {
       </div>
 
       {error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-red-900/50 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
           <AlertCircle className="h-4 w-4" />
           {error}
         </div>
       )}
 
       {status === 'saved' && !error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-emerald-900/50 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
-          <CheckCircle2 className="h-4 w-4" />
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
+          <CheckCircle2 className="h-4 w-4 text-white" />
           Experience saved to Firestore.
         </div>
       )}
@@ -155,7 +155,7 @@ export default function AdminExperiencePage() {
           <form onSubmit={handleAdd} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">Job Title</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">Job Title</label>
                 <input
                   type="text"
                   value={newExp.title || ''}
@@ -166,7 +166,7 @@ export default function AdminExperiencePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">Company</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">Company</label>
                 <input
                   type="text"
                   value={newExp.company || ''}
@@ -179,7 +179,7 @@ export default function AdminExperiencePage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">Location</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">Location</label>
                 <input
                   type="text"
                   value={newExp.location || ''}
@@ -189,7 +189,7 @@ export default function AdminExperiencePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">Start Date</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">Start Date</label>
                 <input
                   type="text"
                   value={newExp.startDate || ''}
@@ -199,7 +199,7 @@ export default function AdminExperiencePage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">End Date</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">End Date</label>
                 <input
                   type="text"
                   value={newExp.endDate || ''}
@@ -210,7 +210,7 @@ export default function AdminExperiencePage() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Description (one per line)</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Description (one per line)</label>
               <textarea
                 value={(newExp.description || []).join('\n')}
                 onChange={(e) => setNewExp({ ...newExp, description: e.target.value.split('\n') })}
@@ -219,7 +219,7 @@ export default function AdminExperiencePage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Technologies (comma separated)</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Technologies (comma separated)</label>
               <input
                 type="text"
                 value={(newExp.technologies || []).join(', ')}
@@ -258,7 +258,7 @@ export default function AdminExperiencePage() {
                 <div className="space-y-4">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">Job Title</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Job Title</label>
                       <input
                         value={editExp.title}
                         onChange={(e) => setEditExp({ ...editExp, title: e.target.value })}
@@ -266,7 +266,7 @@ export default function AdminExperiencePage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">Company</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Company</label>
                       <input
                         value={editExp.company}
                         onChange={(e) => setEditExp({ ...editExp, company: e.target.value })}
@@ -276,7 +276,7 @@ export default function AdminExperiencePage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">Location</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Location</label>
                       <input
                         value={editExp.location}
                         onChange={(e) => setEditExp({ ...editExp, location: e.target.value })}
@@ -284,7 +284,7 @@ export default function AdminExperiencePage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">Start Date</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Start Date</label>
                       <input
                         value={editExp.startDate}
                         onChange={(e) => setEditExp({ ...editExp, startDate: e.target.value })}
@@ -292,7 +292,7 @@ export default function AdminExperiencePage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">End Date</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">End Date</label>
                       <input
                         value={editExp.endDate}
                         onChange={(e) => setEditExp({ ...editExp, endDate: e.target.value })}
@@ -301,7 +301,7 @@ export default function AdminExperiencePage() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Description (one per line)</label>
+                    <label className="block text-xs font-sans text-zinc-500 mb-2">Description (one per line)</label>
                     <textarea
                       value={editExp.description.join('\n')}
                       onChange={(e) => setEditExp({ ...editExp, description: e.target.value.split('\n') })}
@@ -309,7 +309,7 @@ export default function AdminExperiencePage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Technologies (comma separated)</label>
+                    <label className="block text-xs font-sans text-zinc-500 mb-2">Technologies (comma separated)</label>
                     <input
                       value={editExp.technologies.join(', ')}
                       onChange={(e) => setEditExp({ ...editExp, technologies: e.target.value.split(',').map((t) => t.trim()) })}
@@ -352,20 +352,20 @@ export default function AdminExperiencePage() {
                       </button>
                       <button
                         onClick={() => handleDelete(exp.id)}
-                        className="p-2 text-zinc-500 hover:text-red-500 hover:bg-zinc-800 transition-colors"
+                        className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
                   </div>
-                  <ul className="text-zinc-400 text-sm space-y-1 mb-4">
+                  <ul className="mt-3 text-sm text-zinc-400 space-y-1 list-disc list-inside">
                     {exp.description.map((desc, i) => (
-                      <li key={i} className="before:content-['—'] before:mr-2 before:text-zinc-700">{desc}</li>
+                      <li key={i}>{desc}</li>
                     ))}
                   </ul>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1 mt-3">
                     {exp.technologies.map((tech) => (
-                      <span key={tech} className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500">
+                      <span key={tech} className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500">
                         {tech}
                       </span>
                     ))}

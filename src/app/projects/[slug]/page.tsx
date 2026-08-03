@@ -7,6 +7,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { ArrowUpRight, Github, Tag, Loader2 } from "lucide-react";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
 
 export default function ProjectDetailPage() {
   const params = useParams();
@@ -25,7 +26,7 @@ export default function ProjectDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
-        <Loader2 className="w-8 h-8 animate-spin text-zinc-500" />
+        <Loader2 className="w-8 h-8 animate-spin text-white" />
       </div>
     );
   }
@@ -35,55 +36,61 @@ export default function ProjectDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white selection:bg-zinc-800 selection:text-white">
       <Navbar />
 
       <main className="max-w-4xl mx-auto px-6 py-12 space-y-10">
-        <header className="space-y-3 border-b border-zinc-800 pb-6">
-          <p className="text-xs font-mono text-zinc-500 uppercase flex items-center gap-2">
+        <motion.header
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="space-y-3 border-b border-zinc-800 pb-6"
+        >
+          <p className="text-xs font-sans text-zinc-400 uppercase flex items-center gap-2">
             <Tag className="w-4 h-4" />
             {project.category}
           </p>
-          <h1 className="text-4xl font-bold tracking-tight">{project.title}</h1>
-          <p className="text-zinc-400 max-w-3xl">{project.description}</p>
+          <h1 className="text-4xl font-extrabold tracking-tight font-sans uppercase">{project.title}</h1>
+          <p className="text-zinc-400 max-w-3xl text-sm md:text-base leading-relaxed">{project.description}</p>
           <div className="flex flex-wrap gap-2 pt-2">
             {project.technologies.map((tech) => (
               <span
                 key={tech}
-                className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500"
+                className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-2.5 py-1 text-zinc-400"
               >
                 {tech}
               </span>
             ))}
           </div>
-          <div className="flex flex-wrap gap-3 pt-4">
-            {project.github && (
-              <Link
+          <div className="flex flex-wrap gap-3 pt-4 font-sans text-xs font-bold">
+            {project.github && !project.isPrivate && (
+              <motion.a
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
                 href={project.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 bg-white text-black px-4 py-2 font-bold hover:bg-zinc-200 transition-colors"
+                className="inline-flex items-center gap-2 bg-white text-black px-5 py-2.5 hover:bg-zinc-200 transition-colors"
               >
                 <Github className="w-4 h-4" />
-                View on GitHub
+                VIEW ON GITHUB
                 <ArrowUpRight className="w-4 h-4" />
-              </Link>
+              </motion.a>
             )}
           </div>
-        </header>
+        </motion.header>
 
-        <section className="space-y-3 text-zinc-300 leading-relaxed">
+        <section className="space-y-3 text-zinc-300 leading-relaxed text-sm md:text-base">
           <p>
-            This project page is generated from your portfolio data. You can expand it with problem, approach,
-            architecture, and results for this specific project.
+            Detailed project metrics, architecture specs, and commit history are available directly on GitHub.
           </p>
         </section>
 
-        <div className="pt-6 border-t border-zinc-800 flex items-center justify-between text-sm text-zinc-500">
+        <div className="pt-6 border-t border-zinc-800 flex items-center justify-between text-xs font-sans text-zinc-500">
           <Link href="/projects" className="hover:text-white transition-colors">
-            ← Back to projects
+            &lt; BACK TO PROJECTS
           </Link>
-          {project.github && (
+          {project.github && !project.isPrivate && (
             <a
               href={project.github}
               target="_blank"
@@ -91,7 +98,7 @@ export default function ProjectDetailPage() {
               className="flex items-center gap-2 hover:text-white"
             >
               GitHub
-              <ArrowUpRight className="w-4 h-4" />
+              <ArrowUpRight className="w-4 h-4 text-zinc-400" />
             </a>
           )}
         </div>

@@ -47,7 +47,7 @@ export default function AdminLoginPage() {
           className="w-full bg-black border border-zinc-800 px-4 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600"
           required
         />
-        {error && <p className="text-red-500 text-xs">{error}</p>}
+        {error && <p className="text-zinc-300 text-xs bg-zinc-900 border border-zinc-700 p-2 text-center">{error}</p>}
         <button
           type="submit"
           disabled={loading}

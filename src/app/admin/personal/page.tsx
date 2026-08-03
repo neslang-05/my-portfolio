@@ -69,6 +69,7 @@ export default function AdminPersonalPage() {
             phone: formData.phone,
             location: formData.location,
             bio: formData.bio,
+            summary: formData.bio,
           },
           social: {
             github: formData.github,
@@ -93,21 +94,21 @@ export default function AdminPersonalPage() {
       {/* Header */}
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight">Personal Information</h1>
-        <p className="text-zinc-500 mt-1 font-mono text-sm">
+        <p className="text-zinc-500 mt-1 font-sans text-sm">
           Update your personal details and social links
         </p>
       </div>
 
       {error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-red-900/50 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
           <AlertCircle className="h-4 w-4" />
           {error}
         </div>
       )}
 
       {status === 'saved' && !error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-emerald-900/50 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
-          <CheckCircle2 className="h-4 w-4" />
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
+          <CheckCircle2 className="h-4 w-4 text-white" />
           Changes saved to Firestore.
         </div>
       )}
@@ -118,33 +119,33 @@ export default function AdminPersonalPage() {
           <h2 className="text-lg font-bold mb-4">Basic Information</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Full Name</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Full Name</label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Title / Role</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Title / Role</label>
               <input
                 type="text"
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Location</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Location</label>
               <input
                 type="text"
                 value={formData.location}
                 onChange={(e) => setFormData({ ...formData, location: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
           </div>
@@ -155,23 +156,23 @@ export default function AdminPersonalPage() {
           <h2 className="text-lg font-bold mb-4">Contact Information</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Email</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Email</label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Phone</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Phone</label>
               <input
-                type="tel"
+                type="text"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
           </div>
@@ -179,17 +180,15 @@ export default function AdminPersonalPage() {
 
         {/* Bio */}
         <div className="border border-zinc-800 p-6">
-          <h2 className="text-lg font-bold mb-4">Bio</h2>
+          <h2 className="text-lg font-bold mb-4">Biography</h2>
           <div>
-            <label className="block text-sm font-mono text-zinc-400 mb-2">About Me</label>
+            <label className="block text-sm font-sans text-zinc-400 mb-2">About Me</label>
             <textarea
               value={formData.bio}
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               disabled={loading}
-              className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 h-48"
-              placeholder="Write about yourself..."
+              className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 h-40 font-sans"
             />
-            <p className="text-xs text-zinc-600 mt-2">Use double line breaks to separate paragraphs</p>
           </div>
         </div>
 
@@ -198,33 +197,33 @@ export default function AdminPersonalPage() {
           <h2 className="text-lg font-bold mb-4">Social Links</h2>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">GitHub</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">GitHub</label>
               <input
                 type="url"
                 value={formData.github}
                 onChange={(e) => setFormData({ ...formData, github: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">LinkedIn</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">LinkedIn</label>
               <input
                 type="url"
                 value={formData.linkedin}
                 onChange={(e) => setFormData({ ...formData, linkedin: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Instagram</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Instagram</label>
               <input
                 type="url"
                 value={formData.instagram}
                 onChange={(e) => setFormData({ ...formData, instagram: e.target.value })}
                 disabled={loading}
-                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600"
+                className="w-full bg-black border border-zinc-800 px-4 py-3 text-white focus:outline-none focus:border-zinc-600 font-sans"
               />
             </div>
           </div>

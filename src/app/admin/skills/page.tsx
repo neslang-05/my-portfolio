@@ -108,7 +108,7 @@ export default function AdminSkillsPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Skills</h1>
-          <p className="text-zinc-500 mt-1 font-mono text-sm">
+          <p className="text-zinc-500 mt-1 font-sans text-sm">
             Manage your skill categories and technologies
           </p>
         </div>
@@ -123,15 +123,15 @@ export default function AdminSkillsPage() {
       </div>
 
       {error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-red-900/50 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
           <AlertCircle className="h-4 w-4" />
           {error}
         </div>
       )}
 
       {status === 'saved' && !error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-emerald-900/50 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
-          <CheckCircle2 className="h-4 w-4" />
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
+          <CheckCircle2 className="h-4 w-4 text-white" />
           Skills saved to Firestore.
         </div>
       )}
@@ -153,7 +153,7 @@ export default function AdminSkillsPage() {
           </div>
           <form onSubmit={handleAddCategory} className="space-y-4">
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Category Name</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Category Name</label>
               <input
                 type="text"
                 value={newCategory}
@@ -164,7 +164,7 @@ export default function AdminSkillsPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Skills (comma separated)</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Skills (comma separated)</label>
               <input
                 type="text"
                 value={newSkills}
@@ -208,7 +208,7 @@ export default function AdminSkillsPage() {
                       <button
                         onClick={handleEditSave}
                         disabled={saving}
-                        className="p-2 text-emerald-500 hover:bg-zinc-800 transition-colors"
+                        className="p-2 text-white hover:bg-zinc-800 transition-colors"
                       >
                         {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
                       </button>
@@ -224,7 +224,7 @@ export default function AdminSkillsPage() {
                     {editItems.map((item, idx) => (
                       <span
                         key={idx}
-                        className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 flex items-center gap-2"
+                        className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 flex items-center gap-2"
                       >
                         <input
                           value={item}
@@ -233,12 +233,12 @@ export default function AdminSkillsPage() {
                             updated[idx] = e.target.value;
                             setEditItems(updated);
                           }}
-                          className="bg-transparent border-none outline-none w-24"
+                          className="bg-transparent border-none outline-none w-24 text-white"
                         />
                         <button
                           type="button"
                           onClick={() => handleRemoveSkillItem(idx)}
-                          className="text-zinc-600 hover:text-red-500"
+                          className="text-zinc-500 hover:text-white"
                         >
                           <X className="w-3 h-3" />
                         </button>
@@ -247,7 +247,7 @@ export default function AdminSkillsPage() {
                     <button
                       type="button"
                       onClick={handleAddSkillItem}
-                      className="text-xs font-mono border border-dashed border-zinc-700 px-3 py-2 text-zinc-600 hover:text-white hover:border-zinc-500 transition-colors"
+                      className="text-xs font-sans border border-dashed border-zinc-700 px-3 py-2 text-zinc-400 hover:text-white hover:border-zinc-500 transition-colors"
                     >
                       + Add Skill
                     </button>
@@ -266,7 +266,7 @@ export default function AdminSkillsPage() {
                       </button>
                       <button
                         onClick={() => handleDeleteCategory(skillGroup.category)}
-                        className="p-2 text-zinc-500 hover:text-red-500 hover:bg-zinc-800 transition-colors"
+                        className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
@@ -276,7 +276,7 @@ export default function AdminSkillsPage() {
                     {skillGroup.items.map((skill) => (
                       <span
                         key={skill}
-                        className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400"
+                        className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400"
                       >
                         {skill}
                       </span>

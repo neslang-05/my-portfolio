@@ -10,8 +10,8 @@ export default {
   theme: {
   	extend: {
   		fontFamily: {
-  			sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
-  			mono: ['var(--font-mono)', 'JetBrains Mono', 'monospace'],
+  			sans: ['Helvetica', 'Arial', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+  			mono: ['Helvetica', 'Arial', 'Inter', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
   		},
   		colors: {
   			background: 'hsl(var(--background))',

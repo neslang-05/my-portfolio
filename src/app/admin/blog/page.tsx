@@ -116,7 +116,7 @@ export default function AdminBlogPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Blog Posts</h1>
-          <p className="text-zinc-500 mt-1 font-mono text-sm">Manage your blog content</p>
+          <p className="text-zinc-500 mt-1 font-sans text-sm">Manage your blog content</p>
         </div>
         <button
           onClick={() => setIsAdding(true)}
@@ -129,15 +129,15 @@ export default function AdminBlogPage() {
       </div>
 
       {error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-red-900/50 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
           <AlertCircle className="h-4 w-4" />
           {error}
         </div>
       )}
 
       {status === 'saved' && !error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-emerald-900/50 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
-          <CheckCircle2 className="h-4 w-4" />
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
+          <CheckCircle2 className="h-4 w-4 text-white" />
           Blog posts saved to Firestore.
         </div>
       )}
@@ -159,7 +159,7 @@ export default function AdminBlogPage() {
           </div>
           <form onSubmit={handleAdd} className="space-y-4">
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Title</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Title</label>
               <input
                 type="text"
                 value={newPost.title || ''}
@@ -170,42 +170,44 @@ export default function AdminBlogPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Slug</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Slug</label>
               <input
                 type="text"
                 value={newPost.slug || ''}
                 onChange={(e) => setNewPost({ ...newPost, slug: e.target.value })}
                 className="w-full bg-black border border-zinc-800 px-4 py-2 text-white focus:outline-none focus:border-zinc-600"
-                placeholder="post-url-slug"
-              />
-            </div>
-            <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Excerpt</label>
-              <textarea
-                value={newPost.excerpt || ''}
-                onChange={(e) => setNewPost({ ...newPost, excerpt: e.target.value })}
-                className="w-full bg-black border border-zinc-800 px-4 py-2 text-white focus:outline-none focus:border-zinc-600 h-20"
-                placeholder="Brief description of the post"
+                placeholder="my-post-slug"
                 required
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Content (Markdown)</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Excerpt</label>
               <textarea
-                value={newPost.content || ''}
-                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
-                className="w-full bg-black border border-zinc-800 px-4 py-2 text-white focus:outline-none focus:border-zinc-600 h-64 font-mono text-sm"
-                placeholder="# Your markdown content here..."
+                value={newPost.excerpt || ''}
+                onChange={(e) => setNewPost({ ...newPost, excerpt: e.target.value })}
+                className="w-full bg-black border border-zinc-800 px-4 py-2 text-white focus:outline-none focus:border-zinc-600 h-20"
+                placeholder="Brief summary..."
+                required
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Tags (comma separated)</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Content (Markdown)</label>
+              <textarea
+                value={newPost.content || ''}
+                onChange={(e) => setNewPost({ ...newPost, content: e.target.value })}
+                className="w-full bg-black border border-zinc-800 px-4 py-2 text-white focus:outline-none focus:border-zinc-600 h-64 font-sans text-sm"
+                placeholder="Markdown content..."
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Tags (comma separated)</label>
               <input
                 type="text"
                 value={(newPost.tags || []).join(', ')}
                 onChange={(e) => setNewPost({ ...newPost, tags: e.target.value.split(',').map((t) => t.trim()) })}
                 className="w-full bg-black border border-zinc-800 px-4 py-2 text-white focus:outline-none focus:border-zinc-600"
-                placeholder="IoT, Web Dev, Tutorial"
+                placeholder="IoT, Web Dev"
               />
             </div>
             <div className="flex items-center gap-4">
@@ -243,7 +245,7 @@ export default function AdminBlogPage() {
       {/* Posts List */}
       {!loading && (
         <div className="border border-zinc-800">
-          <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-zinc-800 text-xs font-mono text-zinc-500 uppercase">
+          <div className="grid grid-cols-12 gap-4 px-6 py-3 border-b border-zinc-800 text-xs font-sans text-zinc-500 uppercase">
             <div className="col-span-5">Title</div>
             <div className="col-span-2">Date</div>
             <div className="col-span-2">Tags</div>
@@ -251,118 +253,121 @@ export default function AdminBlogPage() {
             <div className="col-span-2 text-right">Actions</div>
           </div>
 
-          {posts.map((post) => (
-            <div key={post.id} className="border-b border-zinc-900">
-              {editingId === post.id && editPost ? (
-                <div className="px-6 py-5 space-y-4 bg-zinc-950">
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Title</label>
-                    <input
-                      value={editPost.title}
-                      onChange={(e) => setEditPost({ ...editPost, title: e.target.value })}
-                      className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600"
-                    />
+          <div className="divide-y divide-zinc-800">
+            {posts.map((post) => (
+              <div key={post.id} className="p-6">
+                {editingId === post.id && editPost ? (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Title</label>
+                      <input
+                        type="text"
+                        value={editPost.title}
+                        onChange={(e) => setEditPost({ ...editPost, title: e.target.value })}
+                        className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Slug</label>
+                      <input
+                        type="text"
+                        value={editPost.slug}
+                        onChange={(e) => setEditPost({ ...editPost, slug: e.target.value })}
+                        className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Excerpt</label>
+                      <textarea
+                        value={editPost.excerpt}
+                        onChange={(e) => setEditPost({ ...editPost, excerpt: e.target.value })}
+                        className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600 h-20"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Content (Markdown)</label>
+                      <textarea
+                        value={editPost.content}
+                        onChange={(e) => setEditPost({ ...editPost, content: e.target.value })}
+                        className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600 h-64 font-sans text-sm"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Tags (comma separated)</label>
+                      <input
+                        type="text"
+                        value={Array.isArray(editPost.tags) ? editPost.tags.join(', ') : editPost.tags}
+                        onChange={(e) => setEditPost({ ...editPost, tags: e.target.value.split(',').map((t) => t.trim()) })}
+                        className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <button
+                        onClick={handleEditSave}
+                        disabled={saving}
+                        className="bg-white text-black px-4 py-2 text-sm font-bold hover:bg-zinc-200 transition-colors flex items-center gap-2 disabled:opacity-60"
+                      >
+                        {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+                        Save Changes
+                      </button>
+                      <button
+                        onClick={handleEditCancel}
+                        className="border border-zinc-800 px-4 py-2 text-sm hover:bg-zinc-900 transition-colors"
+                      >
+                        Cancel
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Slug</label>
-                    <input
-                      value={editPost.slug}
-                      onChange={(e) => setEditPost({ ...editPost, slug: e.target.value })}
-                      className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600"
-                    />
+                ) : (
+                  <div className="grid grid-cols-12 gap-4 items-center">
+                    <div className="col-span-5">
+                      <p className="font-medium">{post.title}</p>
+                      <p className="text-zinc-500 text-sm truncate">{post.excerpt}</p>
+                    </div>
+                    <div className="col-span-2">
+                      <span className="text-zinc-500 text-sm font-sans">{post.date}</span>
+                    </div>
+                    <div className="col-span-2 flex flex-wrap gap-1">
+                      {post.tags.slice(0, 2).map((tag) => (
+                        <span key={tag} className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500">
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="col-span-1">
+                      {post.published ? (
+                        <span className="text-white text-xs font-sans border border-zinc-700 px-2 py-1 bg-zinc-900">Published</span>
+                      ) : (
+                        <span className="text-zinc-600 text-xs font-sans">Draft</span>
+                      )}
+                    </div>
+                    <div className="col-span-2 flex justify-end gap-2">
+                      <button
+                        onClick={() => togglePublish(post.id)}
+                        disabled={saving}
+                        className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
+                        title={post.published ? 'Unpublish' : 'Publish'}
+                      >
+                        {post.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                      </button>
+                      <button
+                        onClick={() => startEdit(post)}
+                        className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
+                      >
+                        <Edit2 className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => handleDelete(post.id)}
+                        className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Excerpt</label>
-                    <textarea
-                      value={editPost.excerpt}
-                      onChange={(e) => setEditPost({ ...editPost, excerpt: e.target.value })}
-                      className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600 h-20"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Content (Markdown)</label>
-                    <textarea
-                      value={editPost.content}
-                      onChange={(e) => setEditPost({ ...editPost, content: e.target.value })}
-                      className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600 h-64 font-mono text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Tags (comma separated)</label>
-                    <input
-                      value={editPost.tags.join(', ')}
-                      onChange={(e) => setEditPost({ ...editPost, tags: e.target.value.split(',').map((t) => t.trim()) })}
-                      className="w-full bg-black border border-zinc-800 px-3 py-2 text-white focus:outline-none focus:border-zinc-600"
-                    />
-                  </div>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={handleEditSave}
-                      disabled={saving}
-                      className="bg-white text-black px-4 py-2 font-bold hover:bg-zinc-200 transition-colors flex items-center gap-2 disabled:opacity-60"
-                    >
-                      {saving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Check className="w-4 h-4" />}
-                      Save
-                    </button>
-                    <button
-                      type="button"
-                      onClick={handleEditCancel}
-                      className="border border-zinc-800 px-4 py-2 hover:bg-zinc-900 transition-colors"
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              ) : (
-                <div className="grid grid-cols-12 gap-4 px-6 py-4 hover:bg-zinc-950 items-center">
-                  <div className="col-span-5">
-                    <p className="font-medium">{post.title}</p>
-                    <p className="text-zinc-500 text-sm truncate">{post.excerpt}</p>
-                  </div>
-                  <div className="col-span-2">
-                    <span className="text-zinc-500 text-sm font-mono">{post.date}</span>
-                  </div>
-                  <div className="col-span-2 flex flex-wrap gap-1">
-                    {post.tags.slice(0, 2).map((tag) => (
-                      <span key={tag} className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500">
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                  <div className="col-span-1">
-                    {post.published ? (
-                      <span className="text-emerald-500 text-xs font-mono">Published</span>
-                    ) : (
-                      <span className="text-zinc-600 text-xs font-mono">Draft</span>
-                    )}
-                  </div>
-                  <div className="col-span-2 flex justify-end gap-2">
-                    <button
-                      onClick={() => togglePublish(post.id)}
-                      disabled={saving}
-                      className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
-                      title={post.published ? 'Unpublish' : 'Publish'}
-                    >
-                      {post.published ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                    <button
-                      onClick={() => startEdit(post)}
-                      className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
-                    >
-                      <Edit2 className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => handleDelete(post.id)}
-                      className="p-2 text-zinc-500 hover:text-red-500 hover:bg-zinc-800 transition-colors"
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
+          </div>
         </div>
       )}
 

@@ -49,7 +49,7 @@ export default function BlogPage() {
                 <input
                   type="email"
                   placeholder="your@email.com"
-                  className="w-full bg-black border border-zinc-800 px-10 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 font-mono text-sm"
+                  className="w-full bg-black border border-zinc-800 px-10 py-3 text-white placeholder:text-zinc-600 focus:outline-none focus:border-zinc-600 font-sans text-sm"
                 />
               </div>
               <button
@@ -64,7 +64,7 @@ export default function BlogPage() {
 
         {/* Blog Posts */}
         <section className="py-12">
-          <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Recent Posts</h2>
+          <h2 className="text-xs font-sans uppercase tracking-wider text-zinc-500 mb-6">Recent Posts</h2>
           
           <div className="space-y-1">
             {publishedPosts.map((post) => (
@@ -83,14 +83,14 @@ export default function BlogPage() {
                     {post.tags.map((tag) => (
                       <span 
                         key={tag} 
-                        className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500"
+                        className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-2 py-1 text-zinc-500"
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
                 </div>
-                <span className="text-xs font-mono text-zinc-600 ml-4 flex-shrink-0">{post.date}</span>
+                <span className="text-xs font-sans text-zinc-600 ml-4 flex-shrink-0">{post.date}</span>
               </Link>
             ))}
           </div>
@@ -106,13 +106,13 @@ export default function BlogPage() {
         {/* Tags Section */}
         {allTags.length > 0 && (
           <section className="py-12 border-t border-zinc-800">
-            <h2 className="text-xs font-mono uppercase tracking-wider text-zinc-500 mb-6">Topics</h2>
+            <h2 className="text-xs font-sans uppercase tracking-wider text-zinc-500 mb-6">Topics</h2>
             <div className="flex flex-wrap gap-2">
               {allTags.map((tag) => (
                 <Link
                   key={tag}
                   href={`/tags/${tag.toLowerCase().replace(' ', '-')}`}
-                  className="text-xs font-mono bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
+                  className="text-xs font-sans bg-zinc-900 border border-zinc-800 px-3 py-2 text-zinc-400 hover:text-white hover:border-zinc-700 transition-colors"
                 >
                   {tag}
                 </Link>

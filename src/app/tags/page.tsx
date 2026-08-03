@@ -48,7 +48,7 @@ export default function TagsPage() {
             <main className="max-w-3xl mx-auto px-6 py-24">
                 {/* Header */}
                 <div className="mb-12">
-                    <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider">Explore</span>
+                    <span className="text-xs font-sans text-zinc-500 uppercase tracking-wider">Explore</span>
                     <h1 className="text-4xl font-bold tracking-tight mt-2">Tags</h1>
                     <p className="text-zinc-400 mt-4">
                         Browse all topics I&apos;ve worked with and written about.
@@ -61,7 +61,7 @@ export default function TagsPage() {
                         <a
                             key={tag}
                             href={`/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                            className="px-4 py-2 bg-zinc-950 border border-zinc-800 text-zinc-400 text-sm font-mono hover:bg-zinc-900 hover:text-white hover:border-zinc-700 transition-colors"
+                            className="px-4 py-2 bg-zinc-950 border border-zinc-800 text-zinc-400 text-sm font-sans hover:bg-zinc-900 hover:text-white hover:border-zinc-700 transition-colors"
                         >
                             {tag}
                         </a>
@@ -73,15 +73,15 @@ export default function TagsPage() {
                     <div className="flex gap-12 text-sm">
                         <div>
                             <span className="text-2xl font-bold">{tags.length}</span>
-                            <p className="text-zinc-500 font-mono text-xs mt-1">Topics</p>
+                            <p className="text-zinc-500 font-sans text-xs mt-1">Topics</p>
                         </div>
                         <div>
                             <span className="text-2xl font-bold">15+</span>
-                            <p className="text-zinc-500 font-mono text-xs mt-1">Projects</p>
+                            <p className="text-zinc-500 font-sans text-xs mt-1">Projects</p>
                         </div>
                         <div>
                             <span className="text-2xl font-bold">3+</span>
-                            <p className="text-zinc-500 font-mono text-xs mt-1">Years Experience</p>
+                            <p className="text-zinc-500 font-sans text-xs mt-1">Years Experience</p>
                         </div>
                     </div>
                 </div>

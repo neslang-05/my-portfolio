@@ -107,7 +107,7 @@ export default function AdminEducationPage() {
       <div className="flex items-center justify-between mb-8">
         <div>
           <h1 className="text-3xl font-bold tracking-tight">Education</h1>
-          <p className="text-zinc-500 mt-1 font-mono text-sm">Manage your educational background</p>
+          <p className="text-zinc-500 mt-1 font-sans text-sm">Manage your educational background</p>
         </div>
         <button
           onClick={() => setIsAdding(true)}
@@ -120,15 +120,15 @@ export default function AdminEducationPage() {
       </div>
 
       {error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-red-900/50 bg-red-950/40 px-4 py-3 text-sm text-red-200">
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
           <AlertCircle className="h-4 w-4" />
           {error}
         </div>
       )}
 
       {status === 'saved' && !error && (
-        <div className="mb-4 flex items-center gap-2 rounded border border-emerald-900/50 bg-emerald-950/40 px-4 py-3 text-sm text-emerald-200">
-          <CheckCircle2 className="h-4 w-4" />
+        <div className="mb-4 flex items-center gap-2 border border-zinc-700 bg-zinc-900 px-4 py-3 text-sm text-zinc-200">
+          <CheckCircle2 className="h-4 w-4 text-white" />
           Education saved to Firestore.
         </div>
       )}
@@ -150,7 +150,7 @@ export default function AdminEducationPage() {
           </div>
           <form onSubmit={handleAdd} className="space-y-4">
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Degree / Certificate</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Degree / Certificate</label>
               <input
                 type="text"
                 value={newEdu.degree || ''}
@@ -162,7 +162,7 @@ export default function AdminEducationPage() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">Institution</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">Institution</label>
                 <input
                   type="text"
                   value={newEdu.institution || ''}
@@ -173,7 +173,7 @@ export default function AdminEducationPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-mono text-zinc-400 mb-2">Location</label>
+                <label className="block text-sm font-sans text-zinc-400 mb-2">Location</label>
                 <input
                   type="text"
                   value={newEdu.location || ''}
@@ -184,7 +184,7 @@ export default function AdminEducationPage() {
               </div>
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Year</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Year</label>
               <input
                 type="text"
                 value={newEdu.year || ''}
@@ -194,7 +194,7 @@ export default function AdminEducationPage() {
               />
             </div>
             <div>
-              <label className="block text-sm font-mono text-zinc-400 mb-2">Description (optional)</label>
+              <label className="block text-sm font-sans text-zinc-400 mb-2">Description (optional)</label>
               <textarea
                 value={newEdu.description || ''}
                 onChange={(e) => setNewEdu({ ...newEdu, description: e.target.value })}
@@ -231,7 +231,7 @@ export default function AdminEducationPage() {
               {editingId === edu.id && editEdu ? (
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Degree / Certificate</label>
+                    <label className="block text-xs font-sans text-zinc-500 mb-2">Degree / Certificate</label>
                     <input
                       value={editEdu.degree}
                       onChange={(e) => setEditEdu({ ...editEdu, degree: e.target.value })}
@@ -240,7 +240,7 @@ export default function AdminEducationPage() {
                   </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">Institution</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Institution</label>
                       <input
                         value={editEdu.institution}
                         onChange={(e) => setEditEdu({ ...editEdu, institution: e.target.value })}
@@ -248,7 +248,7 @@ export default function AdminEducationPage() {
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-mono text-zinc-500 mb-2">Location</label>
+                      <label className="block text-xs font-sans text-zinc-500 mb-2">Location</label>
                       <input
                         value={editEdu.location}
                         onChange={(e) => setEditEdu({ ...editEdu, location: e.target.value })}
@@ -257,7 +257,7 @@ export default function AdminEducationPage() {
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Year</label>
+                    <label className="block text-xs font-sans text-zinc-500 mb-2">Year</label>
                     <input
                       value={editEdu.year}
                       onChange={(e) => setEditEdu({ ...editEdu, year: e.target.value })}
@@ -265,7 +265,7 @@ export default function AdminEducationPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-mono text-zinc-500 mb-2">Description (optional)</label>
+                    <label className="block text-xs font-sans text-zinc-500 mb-2">Description (optional)</label>
                     <textarea
                       value={editEdu.description || ''}
                       onChange={(e) => setEditEdu({ ...editEdu, description: e.target.value })}
@@ -300,7 +300,7 @@ export default function AdminEducationPage() {
                     {edu.description && <p className="text-zinc-500 text-sm mt-2">{edu.description}</p>}
                   </div>
                   <div className="flex items-center gap-4">
-                    <span className="text-xs font-mono text-zinc-500">{edu.year}</span>
+                    <span className="text-xs font-sans text-zinc-500">{edu.year}</span>
                     <div className="flex gap-2">
                       <button
                         onClick={() => startEdit(edu)}
@@ -310,7 +310,7 @@ export default function AdminEducationPage() {
                       </button>
                       <button
                         onClick={() => handleDelete(edu.id)}
-                        className="p-2 text-zinc-500 hover:text-red-500 hover:bg-zinc-800 transition-colors"
+                        className="p-2 text-zinc-500 hover:text-white hover:bg-zinc-800 transition-colors"
                       >
                         <Trash2 className="w-4 h-4" />
                       </button>
